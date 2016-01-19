@@ -1,0 +1,87 @@
+class Training
+  def initialize()
+    data_dir=File.expand_path('../../../lib/data', __FILE__)
+    file_name="#{data_dir}/STEP-47.txt"
+
+    @period = 20
+    @counter = 0
+
+    @time_flag=true
+    print_keyboard
+    start_time,data=init_proc(file_name)
+    #size_training(file_name,data,start_time)
+    time_training(file_name,data,start_time)
+  end
+
+  # count correct spelling
+  def counter(word1,word2)
+    ws1=word1.split(/\s+/)
+    ws2=word2.split(/\s+/)
+    i,j=0,0
+    while (i < ws1.length) && (j < ws2.length) do
+      if ws1[i] == ws2[j] then
+        @counter+=1
+      end
+      i+=1
+      j+=1
+    end
+    puts @counter
+  end
+
+  # time loop
+  def loop_thread(sec)
+    Thread.start(sec) do |wait_time|
+      sleep wait_time
+      puts "\a Time up. Type return-key twice to finish.."
+      @time_flag=false
+    end
+  end
+
+  # print key positions
+  def print_keyboard
+    content = <<-EOF
+ q \\ w \\ e \\ r t \\ y u \\ i \\ o \\ p
+  a \\ s \\ d \\ f g \\ h j \\ k \\ l \\ ; enter
+sh z \\ x \\ c \\ v b \\ n m \\ , \\\ . \\  shift
+EOF
+    print content
+  end
+
+  def init_proc(file_name)
+    data=File.readlines(file_name)
+    data.each{|word| print word }
+    print "\nRepeat above sentences. Type return-key to start."
+    line=STDIN.gets
+    start_time = Time.now
+    return start_time,data
+  end
+
+  def exit_proc(start_time,file_name,period)
+    data_file=open("training_data.txt","a")
+    data_file << "#{start_time},#{file_name},#{@counter},#{period}\n"
+    exit
+  end
+
+  def type_loop(data)
+    data.each do |sentence|
+      break if @time_flag == false
+      puts sentence
+      line=STDIN.gets.chomp
+      counter(sentence,line)
+    end
+  end
+
+  def size_training(file_name,data,start_time)
+    type_loop(data)
+    exit_proc(start_time,file_name,(Time.now-start_time).to_i)
+    return
+  end
+
+  def time_training(file_name,data,start_time)
+    loop_thread(@period)
+    data2=[]
+    20.times{ data2 << data }
+    type_loop(data2.flatten)
+    exit_proc(start_time,file_name,@period)
+  end
+end

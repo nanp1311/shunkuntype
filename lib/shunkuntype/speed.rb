@@ -1,6 +1,6 @@
 
 class SpeedCheck
-  attr_reader :number
+  attr_reader :number, :period
 
   # print key positions
   def print_keyboard
@@ -13,12 +13,25 @@ EOF
   end
 
   def initialize
-    @number = 20
-    data=mk_random_words
-    t0,t1,count=exec_speed_check(data)
+    @number = 5 #default 20
+    @period = 60
+    check_data_files
+    data = mk_random_words
+    t0,t1,count = exec_speed_check(data)
     keep_record(t0,t1,count)
   end
 
+  def check_data_files
+    begin
+      file=open("./speed_data.txt","r")
+      if file
+        puts "speed_data.txt opened succcessfully"
+      end
+    rescue
+      puts "speed_data.txt does not exist in this directory. --init or try in another dir."
+      exit
+    end
+  end
   def mk_random_words
     data=[]
     data_dir=File.expand_path('../../../lib/data', __FILE__)
@@ -58,10 +71,10 @@ EOF
     statement = t0.to_s+","
     statement << @number.to_s+","
     statement << (t1-t0).to_s+","
-    icount=60/(t1-t0)*count
+    icount=@period/(t1-t0)*count
     statement << icount.to_s+"\n"
-#    data_file=open("speed_data.txt","a+")
-#    data_file << statement
+    data_file=open("speed_data.txt","a+")
+    data_file << statement
     p statement
 
     printf("%5.3f sec\n",Time.now-t0)

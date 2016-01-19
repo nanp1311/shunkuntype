@@ -1,5 +1,6 @@
 require "shunkuntype/version"
 require "shunkuntype/speed"
+require "shunkuntype/training"
 
 module Shunkuntype
   # Your code goes here...
@@ -7,7 +8,8 @@ module Shunkuntype
 
     def self.run(argv=[])
       print "Hello world.\n"
-      SpeedCheck.new
+#      SpeedCheck.new
+      Training.new
 #      new(argv).execute
     end
 
