@@ -7,10 +7,11 @@ module Shunkuntype
     module Options
 
       def self.parse!(argv)
+        options = {}
         command_parser = OptionParser.new do |opt|
           opt.on_head('-v', '--version','Show program version') do |v|
+            puts options.ver
             opt.version = Shunkuntype::VERSION
-            puts opt.ver
             exit
           end
         end

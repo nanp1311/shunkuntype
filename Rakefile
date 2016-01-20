@@ -19,6 +19,14 @@ task :hiki do
   system "open -a mi #{dir0}/text/#{name}"
 end
 
+desc "gem upload"
+task :upload do
+  system "rsync -auvz -e ssh pkg/ dmz0:~/Sites/nishitani0/gems/gems/"
+  print "command at dmz0:cd ~/Sites/nishitani0/gems \n"
+  print "command at dmz0:gem generate_index \n"
+  system "ssh dmz0"
+end
+
 Rake::TestTask.new(:test) do |test|
   test.libs << "test"
   test.libs << "lib"

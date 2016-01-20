@@ -1,10 +1,11 @@
 class Training
-  def initialize(val_i=47)
+  def initialize(val_i)
+    val_i ||= 47
     data_dir=File.expand_path('../../../lib/data', __FILE__)
     base_name="STEP-#{val_i}.txt"
     file_name=File.join(data_dir,base_name)
 
-    @period = 20
+    @period = 60
     @counter = 0
 
     @time_flag=true
@@ -58,7 +59,7 @@ EOF
   end
 
   def keep_record(start_time,file_name,period)
-    data_file=open("training_data.txt","a")
+    data_file=open(Shunkuntype::TRAIN_FILE,"a")
     data_file << "#{start_time},#{file_name},#{@counter},#{period}\n"
     exit
   end

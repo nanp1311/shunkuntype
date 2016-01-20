@@ -13,7 +13,7 @@ EOF
   end
 
   def initialize
-    @number = 5 #default 20
+    @number = 20 #default 20
     @period = 60
     check_data_files
     data = mk_random_words
@@ -23,12 +23,12 @@ EOF
 
   def check_data_files
     begin
-      file=open(Shunkuntype::SPEED_DATA,"r")
+      file=open(Shunkuntype::SPEED_FILE,"r")
       if file
-        puts "#{Shunkuntype::SPPED_DATA} opened succcessfully"
+        puts "#{Shunkuntype::SPEED_FILE} opened succcessfully"
       end
     rescue
-      puts "#{Shunkuntype::SPPED_DATA} does not exist in this directory. --init or try in another dir."
+      puts "#{Shunkuntype::SPEED_FILE} does not exist in this directory. --init or try in another dir."
       exit
     end
   end
