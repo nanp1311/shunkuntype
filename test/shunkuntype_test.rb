@@ -1,5 +1,7 @@
 require 'test_helper'
 require 'test/unit'
+require 'shunkuntype'
+
 #class ShunkuntypeTest < Minitest::Test
 
 module Test::Unit

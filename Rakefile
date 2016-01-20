@@ -10,6 +10,7 @@ end
 
 YARD::Rake::YardocTask.new
 
+desc "hiki upload"
 task :hiki do
   dir0="~/Sites/nishitani0/Internal/data"
   name="TouchTyping_shunkuntype_gemizing"

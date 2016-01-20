@@ -1,7 +1,8 @@
 class Training
   def initialize()
     data_dir=File.expand_path('../../../lib/data', __FILE__)
-    file_name="#{data_dir}/STEP-47.txt"
+    base_name="STEP-47.txt"
+    file_name=File.join(data_dir,base_name)
 
     @period = 20
     @counter = 0
@@ -10,7 +11,7 @@ class Training
     print_keyboard
     start_time,data=init_proc(file_name)
     #size_training(file_name,data,start_time)
-    time_training(file_name,data,start_time)
+    time_training(base_name,data,start_time)
   end
 
   # count correct spelling
@@ -56,7 +57,7 @@ EOF
     return start_time,data
   end
 
-  def exit_proc(start_time,file_name,period)
+  def keep_record(start_time,file_name,period)
     data_file=open("training_data.txt","a")
     data_file << "#{start_time},#{file_name},#{@counter},#{period}\n"
     exit
@@ -77,11 +78,11 @@ EOF
     return
   end
 
-  def time_training(file_name,data,start_time)
+  def time_training(base_name,data,start_time)
     loop_thread(@period)
     data2=[]
     20.times{ data2 << data }
     type_loop(data2.flatten)
-    exit_proc(start_time,file_name,@period)
+    keep_record(start_time,base_name,@period)
   end
 end
