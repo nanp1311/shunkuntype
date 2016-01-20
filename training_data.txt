@@ -1,8 +1,0 @@
-2016-01-19 17:35:11 +0900,/usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/lib/data/STEP-47.txt,17,20
-2016-01-19 17:36:27 +0900,/usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/lib/data/STEP-47.txt,17,20
-2016-01-19 17:38:54 +0900,/usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/lib/data/STEP-47.txt,20,20
-2016-01-19 17:40:42 +0900,/usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/lib/data/STEP-47.txt,18,20
-2016-01-19 17:41:36 +0900,STEP-47.txt,19,20
-2016-01-19 17:43:41 +0900,/usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/lib/data/STEP-47.txt,18,20
-2016-01-19 17:44:40 +0900,/usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/lib/data/STEP-47.txt,10,20
-2016-01-19 17:45:22 +0900,STEP-47.txt,18,20

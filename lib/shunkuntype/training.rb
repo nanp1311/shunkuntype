@@ -1,7 +1,7 @@
 class Training
-  def initialize()
+  def initialize(val_i=47)
     data_dir=File.expand_path('../../../lib/data', __FILE__)
-    base_name="STEP-47.txt"
+    base_name="STEP-#{val_i}.txt"
     file_name=File.join(data_dir,base_name)
 
     @period = 20

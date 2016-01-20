@@ -1,16 +1,14 @@
 require "shunkuntype/version"
 require "shunkuntype/speed"
 require "shunkuntype/training"
-require "shunkuntype/options"
+require "shunkuntype/init"
 
 module Shunkuntype
   # Your code goes here...
   class Command
 
     def self.run(argv=[])
-      print "Hello world.\n"
-#      SpeedCheck.new
-#      Training.new
+      print "Shunkuntype says 'Hello world'.\n"
       new(argv).execute
     end
 
@@ -21,37 +19,16 @@ module Shunkuntype
     def execute
       return if @argv.size==0
       command_parser = OptionParser.new do |opt|
-        opt.on('-v', '--version','Show program version.') do |v|
+        opt.on('-v', '--version','Show program version.') { |v|
           opt.version = Shunkuntype::VERSION
           puts opt.ver
-          exit
-        end
-        opt.on('-s', '--speed','Speed check.') do |v|
-          SpeedCheck.new
-          exit
-        end
+        }
+        opt.on('-i', '--init','Initialize data files.') {|v| InitDataFiles.new }
+        opt.on('-s', '--speed','Speed check.') {|v| SpeedCheck.new }
+        opt.on('-m', '--minute VAL','Minute training of file Integer.', Integer) {|v| Training.new(v) }
       end
-
       command_parser.parse!(@argv)
-#
-#
-#      sub_command = options.delete(:command)
-#
-#      begin
-#        tasks = case sub_command
-#                when 'version'
-#                when 'delete'
-#                  delete_task(options[:id])
-#                when 'update'
-#                  update_task(options[:id], options)
-#                when 'list'
-#                  find_tasks(options[:status])
-#                end
-#        display_tasks tasks
-#      rescue => e
-#        abort "Error: #{e.message}"
-#      end
-
+      exit
     end
   end
 end

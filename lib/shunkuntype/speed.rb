@@ -23,12 +23,12 @@ EOF
 
   def check_data_files
     begin
-      file=open("./speed_data.txt","r")
+      file=open(Shunkuntype::SPEED_DATA,"r")
       if file
-        puts "speed_data.txt opened succcessfully"
+        puts "#{Shunkuntype::SPPED_DATA} opened succcessfully"
       end
     rescue
-      puts "speed_data.txt does not exist in this directory. --init or try in another dir."
+      puts "#{Shunkuntype::SPPED_DATA} does not exist in this directory. --init or try in another dir."
       exit
     end
   end
@@ -73,7 +73,7 @@ EOF
     statement << (t1-t0).to_s+","
     icount=@period/(t1-t0)*count
     statement << icount.to_s+"\n"
-    data_file=open("speed_data.txt","a+")
+    data_file=open(Shunkuntype::SPEED_FILE,"a+")
     data_file << statement
     p statement
 
