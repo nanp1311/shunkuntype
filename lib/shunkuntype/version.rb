@@ -1,5 +1,5 @@
 module Shunkuntype
-  VERSION = "0.5.0"
+  VERSION = "0.5.2"
   SPEED_FILE="./shunkuntype_speed_data.txt"
   TRAIN_FILE="./shunkuntype_training_data.txt"
 end

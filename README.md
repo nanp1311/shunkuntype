@@ -1,8 +1,6 @@
 # Shunkuntype
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/shunkuntype`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Touch type習得アプリ．Touch type mastering application.  
 
 ## Installation
 
@@ -20,9 +18,31 @@ Or install it yourself as:
 
     $ gem install shunkuntype
 
+現在のところ一般公開ではなく，下記のサイトにclosedで置いている．そこからdown loadするには
+あらかじめgemにserver addressを登録しておく必要がある．さらに関学のネットからのアクセスには
+proxyを通しておく必要がある．
+```tcsh
+bob% setenv HTTP_PROXY http://proxy.ksc.kwansei.ac.jp:8080
+bob% setenv HTTPS_PROXY http://proxy.ksc.kwansei.ac.jp:8080
+bob% gem source -a 'http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/' 
+http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/ added to sources
+bob% gem search shunkuntype -r
+for bash, zsh
+bob% export HTTP_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
+bob% export  HTTPS_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+Usage: shunkuntype [options]
+    -v, --version                    Show program version.
+    -i, --init                       initialize data files.
+    -s, --speed                      speed check.
+    -m, --minute [VAL]               minute training of file Integer.
+    -h, --history                    view training history.
+    -r, --report                     submit data to dmz0
+```
 
 ## Development
 
