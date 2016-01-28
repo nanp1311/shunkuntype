@@ -34,7 +34,7 @@ module Shunkuntype
         opt.on('-h', '--history','view training history.') {|v| FinishCheck.new }
         opt.on('-p', '--plot','plot data view') { |v| PlotData.new }
         opt.on('-r', '--report','submit data to dmz0') { |v| report_submit()}
-        opt.on('-d', '--data','data viewing for all members') { |v| data_viewing()}
+        opt.on('--view [VALUE]',[:html,:hiki],'data viewing VALUEs=html or hiki'){|v| data_viewing(v)}
       end
       command_parser.parse!(@argv)
       exit
@@ -52,19 +52,31 @@ module Shunkuntype
           system "scp #{Shunkuntype::SPEED_FILE} #{true_name}@dmz0:#{dir}/#{true_name}_speed_data.txt"
     end
 
-    def data_viewing
-      # download data
+    def data_viewing(form)
       system "scp -r dmz0:/Users/bob/Sites/nishitani0/ShunkunTyper/mem_data ."
       # write data to file
       table = MkSummary.new
       MkPlots.new
-      File.open('tmp.html','a'){|f|
-        f.write("<html>\n")
-        f.write(table.mk_html_table())
-        f.write("<p><img src=\"./work.png\" /></p>")
-        f.write("<p><img src=\"./speed.png\" /></p>")
-        f.write("</html>\n")
-      }
+      p form ||= :html
+      case form
+        when :html then
+        File.open('tmp.html','a'){|f|
+          f.write("<html>\n")
+          f.write(table.mk_html_table())
+          f.write("<p><img src=\"./work.png\" /></p>")
+          f.write("<p><img src=\"./speed.png\" /></p>")
+          f.write("</html>\n")
+        }
+        when :hiki then
+        File.open('tmp.hiki','a'){|f|
+          f.write(table.mk_hiki_table())
+          f.write('||{{attach_view(work.png)}}')
+          f.write('||{{attach_view(speed.png)}}')
+          f.write("\n")
+        }
+        else
+        exit
+      end
     end
   end
 end
