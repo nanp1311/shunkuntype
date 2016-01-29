@@ -31,7 +31,7 @@ class FinishCheck
 
 #    text=[['Basic','minute'],['GerardStrong','size']]
     text=[['Basic','minute']]
-    1.times{|i| 
+    1.times{|i|
       print display(STEPS[i],finish[i],text[i][0],text[i][1])
     }
   end
@@ -41,13 +41,13 @@ class FinishCheck
     cont << sprintf("hour | %-21s | step\n",'contents')
     step.each_with_index do |ele,indx|
       cont << sprintf("%4s | %-21s | ",indx,ele[0])
-      ele[1..-1].each {|e2| 
+      ele[1..-1].each {|e2|
         cont << e2.to_s+"," if finished.include?(e2)
       }
       cont<< "\n"
     end
     next_step=finished[-1].to_i+1
-    cont << "To continue minute training: shunkuntype -m #{next_step}.\n\n"
+    cont << "To continue one minute training: shunkuntype -t #{next_step}.\n\n"
     return cont
   end
 

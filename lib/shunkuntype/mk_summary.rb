@@ -50,7 +50,7 @@ class MkSummary
     cont << "<tr><th></th><th>init</th><th>current</th><th>total time[min]</th><th>step</th></tr>\n"
     @scores.each_pair{|key,score|
       cont << "<tr><th>#{key}</th>"
-      score.each{|val| cont << "<td>#{val}</td>"}
+      score.each{|val| cont << sprintf("<td>%5.2f</td>",val)}
       cont << "</tr>\n"
     }
     cont << "</table>\n"

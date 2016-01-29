@@ -24,17 +24,17 @@ module Shunkuntype
     def execute
       @argv << '--help' if @argv.size==0
       command_parser = OptionParser.new do |opt|
-        opt.on('-v', '--version','Show program version.') { |v|
+        opt.on('-v', '--version','show program Version.') { |v|
           opt.version = Shunkuntype::VERSION
           puts opt.ver
         }
-        opt.on('-i', '--init','initialize data files.') {|v| InitDataFiles.new }
-        opt.on('-s', '--speed','speed check.') {|v| SpeedCheck.new }
-        opt.on('-m', '--minute [VAL]','minute training of file Integer.', Integer) {|v| Training.new(v) }
-        opt.on('-h', '--history','view training history.') {|v| FinishCheck.new }
-        opt.on('-p', '--plot','plot data view') { |v| PlotData.new }
-        opt.on('-r', '--report','submit data to dmz0') { |v| report_submit()}
-        opt.on('--view [VALUE]',[:html,:hiki],'data viewing VALUEs=html or hiki'){|v| data_viewing(v)}
+        opt.on('-i', '--init','Initialize data files') {|v| InitDataFiles.new }
+        opt.on('-c', '--check','Check speed') {|v| SpeedCheck.new }
+        opt.on('-t', '--training [VAL]','one minute Training of file [VAL]', Integer) {|v| Training.new(v) }
+        opt.on('-h', '--history','view training History') {|v| FinishCheck.new }
+        opt.on('-p', '--plot','Plot personal data') { |v| PlotPersonalData.new }
+        opt.on('-s', '--submit','Submit data to dmz0') { |v| report_submit()}
+        opt.on('--review [VALUE]',[:html,:hiki],'Review training, VALUEs=html or hiki'){|v| data_viewing(v)}
       end
       command_parser.parse!(@argv)
       exit

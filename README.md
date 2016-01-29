@@ -1,6 +1,6 @@
 # Shunkuntype
 
-Touch type習得アプリ．Touch type mastering application.  
+touch typing習得をめざしたcommand line interface アプリ．Touch type mastering application.  
 
 ## Installation
 
@@ -21,27 +21,32 @@ Or install it yourself as:
 現在のところ一般公開ではなく，下記のサイトにclosedで置いている．そこからdown loadするには
 あらかじめgemにserver addressを登録しておく必要がある．さらに関学のネットからのアクセスには
 proxyを通しておく必要がある．
-```tcsh
-bob% setenv HTTP_PROXY http://proxy.ksc.kwansei.ac.jp:8080
-bob% setenv HTTPS_PROXY http://proxy.ksc.kwansei.ac.jp:8080
-bob% gem source -a 'http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/' 
-http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/ added to sources
-bob% gem search shunkuntype -r
+
+```ruby
+for tcsh
+  bob% setenv HTTP_PROXY http://proxy.ksc.kwansei.ac.jp:8080
+  bob% setenv HTTPS_PROXY http://proxy.ksc.kwansei.ac.jp:8080
 for bash, zsh
-bob% export HTTP_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
-bob% export  HTTPS_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
+  bob% export HTTP_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
+  bob% export  HTTPS_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
+
+  bob% gem source -a 'http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/' 
+http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/ added to sources
+
 ```
 
 ## Usage
 
 ```ruby
 Usage: shunkuntype [options]
-    -v, --version                    Show program version.
-    -i, --init                       initialize data files.
-    -s, --speed                      speed check.
-    -m, --minute [VAL]               minute training of file Integer.
-    -h, --history                    view training history.
-    -r, --report                     submit data to dmz0
+    -v, --version                    show program Version.
+    -i, --init                       Initialize data files
+    -c, --check                      Check speed
+    -t, --training [VAL]             one minute Training of file [VAL]
+    -h, --history                    view training History
+    -p, --plot                       Plot personal data
+    -s, --submit                     Submit data to dmz0
+        --review [VALUE]             Review training, VALUEs=html or hiki
 ```
 
 ## Development

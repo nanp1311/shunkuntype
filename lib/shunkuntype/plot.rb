@@ -1,6 +1,6 @@
 require 'time'
 
-class PlotData
+class PlotPersonalData
 
   def initialize
     plot_data = read_data()

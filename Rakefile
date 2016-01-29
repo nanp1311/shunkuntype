@@ -14,10 +14,13 @@ desc "hiki upload"
 task :hiki do
   dir0="~/Sites/nishitani0/Internal/data/"
   name="TouchTyping_shunkuntype_gemizing"
-  system "sudo rm #{dir0}cache/parser/#{name}"
-  system "open http://127.0.0.1/~bob/nishitani0/Internal/?#{name}"
-  system "open -a mi #{dir0}text/#{name}"
+#  system "sudo rm #{dir0}cache/parser/#{name}"
+#  system "open http://127.0.0.1/~bob/nishitani0/Internal/?#{name}"
+#  system "open -a mi #{dir0}text/#{name}"
+#  system "sudo cp -fr doc/* ~/Sites/nishitani0/rdocs/shunkuntype/"
   system "rsync -auvz -e ssh #{dir0} dmz0:#{dir0}"
+  dir1="~/Sites/nishitani0/rdocs/shunkuntype/"
+  system "rsync -auvz -e ssh #{dir1} dmz0:#{dir1}"
 end
 
 desc "gem upload"
