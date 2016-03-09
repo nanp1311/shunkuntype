@@ -18,23 +18,6 @@ Or install it yourself as:
 
     $ gem install shunkuntype
 
-現在のところ一般公開ではなく，下記のサイトにclosedで置いている．そこからdown loadするには
-あらかじめgemにserver addressを登録しておく必要がある．さらに関学のネットからのアクセスには
-proxyを通しておく必要がある．
-
-```ruby
-for tcsh
-  bob% setenv HTTP_PROXY http://proxy.ksc.kwansei.ac.jp:8080
-  bob% setenv HTTPS_PROXY http://proxy.ksc.kwansei.ac.jp:8080
-for bash, zsh
-  bob% export HTTP_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
-  bob% export  HTTPS_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
-
-  bob% gem source -a 'http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/' 
-http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/ added to sources
-
-```
-
 ## Usage
 
 ```ruby
@@ -57,7 +40,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/shunkuntype. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/daddygongon/shunkuntype. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
