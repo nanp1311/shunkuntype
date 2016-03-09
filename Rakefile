@@ -10,28 +10,6 @@ end
 
 YARD::Rake::YardocTask.new
 
-desc "hiki upload"
-task :hiki do
-  dir0="~/Sites/nishitani0/Internal/data/"
-  name="TouchTyping_shunkuntype_gemizing"
-#  system "sudo rm #{dir0}cache/parser/#{name}"
-#  system "open http://127.0.0.1/~bob/nishitani0/Internal/?#{name}"
-#  system "open -a mi #{dir0}text/#{name}"
-#  system "sudo cp -fr doc/* ~/Sites/nishitani0/rdocs/shunkuntype/"
-  system "rsync -auvz -e ssh #{dir0} dmz0:#{dir0}"
-  system "sudo cp -rf doc/* ~/Sites/nishitani0/rdocs/shunkuntype/"
-  dir1="~/Sites/nishitani0/rdocs/shunkuntype/"
-  system "rsync -auvz -e ssh #{dir1} dmz0:#{dir1}"
-end
-
-desc "gem upload"
-task :upload do
-  system "rsync -auvz -e ssh pkg/ dmz0:~/Sites/nishitani0/gems/gems/"
-  print "command at dmz0:cd ~/Sites/nishitani0/gems \n"
-  print "command at dmz0:gem generate_index \n"
-  system "ssh dmz0"
-end
-
 Rake::TestTask.new(:test) do |test|
   test.libs << "test"
   test.libs << "lib"
