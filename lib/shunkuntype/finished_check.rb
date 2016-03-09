@@ -9,24 +9,14 @@ class FinishCheck
           ['lo.    30,31,32,33,34', 30,31,32,33,34],
           ['aqz    35,36,37,38,39', 35,36,37,38,39],
           [';p  40,41,42,43,44,45',40,41,42,43,44,45],
-          ['consol 46,47,48,49,50', 46,47,48,49,50]],
-         [['home        1,2',1,2],
-          ['eigh      3,4,5',3,4,5],
-          ['onshiftt  6,7,8',6,7,8],
-          ['extra,y 9,10,11',9,10,11],
-          [',wrb   12,13,14',12,13,14],
-          ['mupc   15,16,17',15,16,17],
-          ['vxqz   18,19,20',18,19,20],
-          ['sentence  21,22',21,22],
-          ['figure 23,24,25',23,24,25],
-          ['paragraph    26',26]
+          ['consol 46,47,48,49,50', 46,47,48,49,50]]
          ]]
   def initialize
     finish = [[],[]]
     File.open(Shunkuntype::TRAIN_FILE,'r').each{|line|
       name = line.chomp.split(',')[1]
       step = name.scan(/\d+/)[0].to_i
-      name.include?('GerardStrong_data') ? finish[1] << step : finish[0] << step
+      finish[0] << step
     }
 
 #    text=[['Basic','minute'],['GerardStrong','size']]
