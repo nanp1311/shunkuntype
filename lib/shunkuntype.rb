@@ -7,6 +7,7 @@ require "shunkuntype/finished_check"
 require "shunkuntype/plot"
 require "shunkuntype/mk_summary"
 require "shunkuntype/plot_data"
+require "shunkuntype/db"
 require 'systemu'
 
 module Shunkuntype
@@ -22,6 +23,8 @@ module Shunkuntype
     end
 
     def execute
+      DB.prepare
+
       @argv << '--help' if @argv.size==0
       command_parser = OptionParser.new do |opt|
         opt.on('-v', '--version','show program Version.') { |v|
@@ -30,30 +33,28 @@ module Shunkuntype
         }
         opt.on('-i', '--init','Initialize data files') {|v| InitDataFiles.new }
         opt.on('-c', '--check','Check speed') {|v| SpeedCheck.new }
-        opt.on('-t', '--training [VAL]','one minute Training of file [VAL]', Integer) {|v| Training.new(v) }
+        opt.on('-d', '--drill [VAL]','one minute Drill [VAL]', Integer) {|v| Training.new(v) }
         opt.on('-h', '--history','view training History') {|v| FinishCheck.new }
         opt.on('-p', '--plot','Plot personal data') { |v| PlotPersonalData.new }
         opt.on('-s', '--submit','Submit data to dmz0') { |v| report_submit()}
-        opt.on('--review [VALUE]',[:html,:hiki],'Review training, VALUEs=html or hiki'){|v| data_viewing(v)}
+        opt.on('--review [TAG]',[:html,:hiki],'Review training, TAGs=html or hiki'){|v| data_viewing(v)}
       end
       command_parser.parse!(@argv)
       exit
     end
 
     def report_submit
-          status, stdout, stderr = systemu "users"
-          p name = stdout.chomp
-          trans = {"MorishitaShinya"=>'donkey',"iwasakyouyuu"=>'iwasa','FujimotoKouki'=>'fujimoto',
-            "kiyoharamotoyuki"=>'kiyohara',"sumitashinya"=>'sumita'}
-          true_name = trans.include?(name) ? trans[name] : name
-          p true_name
-          dir ='/Users/bob/Sites/nishitani0/ShunkunTyper/mem_data'
-          system "scp #{Shunkuntype::TRAIN_FILE} #{true_name}@dmz0:#{dir}/#{true_name}_training_data.txt"
-          system "scp #{Shunkuntype::SPEED_FILE} #{true_name}@dmz0:#{dir}/#{true_name}_speed_data.txt"
+      server_info=File.readlines(Shunkuntype::SERVER_FILE)
+      p server_directory=server_info[0].chomp
+      p user_name=server_info[0].split('@')[0]
+      system "scp #{Shunkuntype::TRAIN_FILE} #{server_directory}/#{user_name}_training_data.txt"
+      system "scp #{Shunkuntype::SPEED_FILE} #{server_directory}/#{user_name}_speed_data.txt"
     end
 
     def data_viewing(form)
-      system "scp -r dmz0:/Users/bob/Sites/nishitani0/ShunkunTyper/mem_data ."
+      server_info=File.readlines(Shunkuntype::SERVER_FILE)
+      p server_directory=server_info[0].chomp
+      system "scp -r #{server_directory} ."
       # write data to file
       table = MkSummary.new
       MkPlots.new

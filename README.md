@@ -42,7 +42,7 @@ Usage: shunkuntype [options]
     -v, --version                    show program Version.
     -i, --init                       Initialize data files
     -c, --check                      Check speed
-    -t, --training [VAL]             one minute Training of file [VAL]
+    -d, --drill [VAL]                one minute Drill [VAL]
     -h, --history                    view training History
     -p, --plot                       Plot personal data
     -s, --submit                     Submit data to dmz0

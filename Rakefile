@@ -19,6 +19,7 @@ task :hiki do
 #  system "open -a mi #{dir0}text/#{name}"
 #  system "sudo cp -fr doc/* ~/Sites/nishitani0/rdocs/shunkuntype/"
   system "rsync -auvz -e ssh #{dir0} dmz0:#{dir0}"
+  system "sudo cp -rf doc/* ~/Sites/nishitani0/rdocs/shunkuntype/"
   dir1="~/Sites/nishitani0/rdocs/shunkuntype/"
   system "rsync -auvz -e ssh #{dir1} dmz0:#{dir1}"
 end

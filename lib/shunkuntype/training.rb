@@ -34,7 +34,7 @@ class Training
   def loop_thread(sec)
     Thread.start(sec) do |wait_time|
       sleep wait_time
-      puts "\a Time up. Type return-key twice to finish.."
+      puts "\a Time up. Type return-key to finish.."
       @time_flag=false
     end
   end

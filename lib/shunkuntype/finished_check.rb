@@ -47,7 +47,7 @@ class FinishCheck
       cont<< "\n"
     end
     next_step=finished[-1].to_i+1
-    cont << "To continue one minute training: shunkuntype -t #{next_step}.\n\n"
+    cont << "To continue one minute training: shunkuntype -d #{next_step}.\n\n"
     return cont
   end
 
