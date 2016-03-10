@@ -12,13 +12,13 @@ class InitDataFiles
       print "#{Shunkuntype::SPEED_FILE} exits.\n"
     else
       File::open(Shunkuntype::SPEED_FILE,'a')
-      print "make #{Shunkuntype::SPEED_FILE}.\n"
+      print "make #{Shunkuntype::SPEED_FILE}\n"
     end
     if File::exist?(Shunkuntype::TRAIN_FILE) then
       print "#{Shunkuntype::TRAIN_FILE} exits.\n"
     else
       File::open(Shunkuntype::TRAIN_FILE,'a')
-      print "make #{Shunkuntype::TRAIN_FILE}.\n"
+      print "make #{Shunkuntype::TRAIN_FILE}\n"
     end
   end
 end

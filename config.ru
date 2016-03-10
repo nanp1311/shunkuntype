@@ -1,3 +1,3 @@
 require 'application'
 
-run Todo::Application
+run Shunkuntype::Application
