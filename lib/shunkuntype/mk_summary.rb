@@ -1,7 +1,7 @@
 class MkSummary
   def initialize
     files = Dir::entries("./mem_data")
-    member = mk_member(files)
+    p member = mk_member(files)
     @scores = take_scores(files,member)
   end
 

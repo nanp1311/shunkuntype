@@ -23,7 +23,6 @@ Or install it yourself as:
 ```ruby
 Usage: shunkuntype [options]
     -v, --version                    show program Version.
-    -i, --init                       Initialize data files
     -c, --check                      Check speed
     -d, --drill [VAL]                one minute Drill [VAL]
     -h, --history                    view training History

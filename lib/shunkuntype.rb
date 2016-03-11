@@ -2,7 +2,6 @@ require 'optparse'
 require "shunkuntype/version"
 require "shunkuntype/speed"
 require "shunkuntype/training"
-require "shunkuntype/init"
 require "shunkuntype/finished_check"
 require "shunkuntype/plot"
 require "shunkuntype/mk_summary"
@@ -23,7 +22,7 @@ module Shunkuntype
     end
 
     def execute
-      DB.prepare
+      DataFiles.prepare
 
       @argv << '--help' if @argv.size==0
       command_parser = OptionParser.new do |opt|
@@ -31,7 +30,6 @@ module Shunkuntype
           opt.version = Shunkuntype::VERSION
           puts opt.ver
         }
-        opt.on('-i', '--init','Initialize data files') {|v| InitDataFiles.new }
         opt.on('-c', '--check','Check speed') {|v| SpeedCheck.new }
         opt.on('-d', '--drill [VAL]','one minute Drill [VAL]', Integer) {|v| Training.new(v) }
         opt.on('-h', '--history','view training History') {|v| FinishCheck.new }
