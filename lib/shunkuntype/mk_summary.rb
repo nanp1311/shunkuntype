@@ -1,7 +1,8 @@
 class MkSummary
-  def initialize
-    files = Dir::entries("./mem_data")
-    p member = mk_member(files)
+  def initialize(tmp_dir)
+    $mem_dir=File.join(tmp_dir,"mem_data")
+    files = Dir::entries($mem_dir)
+    member = mk_member(files)
     @scores = take_scores(files,member)
   end
 
@@ -22,14 +23,14 @@ class MkSummary
       p name
       speed_file="#{name}_speed_data.txt"
       if files.include?(speed_file)
-        file = File.readlines("mem_data/#{speed_file}")
+        file = File.readlines(File.join($mem_dir,speed_file))
         init= (file[0]!=nil ? file[0].split(",")[2].to_f : 0.0 )
         cur = (file[-1]!=nil ? file[-1].split(",")[2].to_f : 0.0 )
         scores[name]=[init,cur]
       end
       training_file="#{name}_training_data.txt"
       if files.include?(training_file)
-        file = File.readlines("mem_data/#{training_file}")
+        file = File.readlines(File.join($mem_dir,training_file))
         work_time = file.inject(0){|sum,line|
           sec=line.split(',')[3].to_i
           sec= (sec!=0)? sec : 60

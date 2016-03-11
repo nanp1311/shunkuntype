@@ -1,15 +1,29 @@
+# -*- coding: utf-8 -*-
 require 'time'
+require 'fileutils'
 require "gnuplot"
 
+# = gnuplotが扱えるデータフォーマットへの変換
+# ==Usage
+#    data0 = PlotData.new(name0,0,3,name)
+#    data0.add_general_data(name1, 0, 2)
+#    start=Time.parse(Time.now.to_s)
+#    x_func = proc{|x| ((Time.parse(x)-start)/3600/24) }
+#    y_func = proc{|y| y.to_f/60.0 }
+#    data0.mk_plot_data(x_func,y_func)
+#    data0.sort
+#    data0.sum_data
+#
 class PlotData
   attr_accessor :data, :title
-  #  def initialize()
+
   def initialize(file_name="",x_col=nil,y_col=nil,title="")
     @data=[]
     read_general_data(file_name,x_col,y_col) if ""!=file_name
     @title=title if ""!=title
   end
 
+# @!group data read
   def add_general_data(file, x_col, y_col)
     read_general_data(file, x_col, y_col)
   end
@@ -22,7 +36,10 @@ class PlotData
       end
     }
   end
+# @!endgroup
 
+  #gnuplot libraryに沿った形のdataを出力．
+  # 列データを行データに
   def to_gnuplot()
     x,y=[],[]
     @data.each{|ele|
@@ -32,6 +49,7 @@ class PlotData
     return [x,y]
   end
 
+  # x_func,y_funcに変換関数をyieldで入れる
   def mk_plot_data(x_func,y_func)
     tmp_data=[]
     @data.each{|ele|
@@ -42,6 +60,7 @@ class PlotData
     @data = tmp_data
   end
 
+  #y軸の値の積分を取る
   def sum_data
     tmp_data=[]
     y_data=0
@@ -49,6 +68,7 @@ class PlotData
     @data = tmp_data
   end
 
+  #x軸の値によってsortをかける．
   def sort
     @data.sort!{|x,y| x[0] <=> y[0]}
   end
@@ -56,12 +76,14 @@ end
 
 class MkPlots
 
-  def initialize
-    @source_dir='mem_data'
+  def initialize(tmp_dir)
+    @source_dir=File.join(tmp_dir,'mem_data')
     @mem_names=[]
     mk_mem_names()
     work_all()
+    FileUtils.mv('res.png', './work.png')
     speed_all()
+    FileUtils.mv('res.png', './speed.png')
   end
 
   def work_all
@@ -69,8 +91,6 @@ class MkPlots
     text="Work minutes [min]"
     plot(all_data,text)
     plot(all_data,text,opts={:png=>true})
-    #      system 'cp res.png ~/Sites/nishitani0/Internal/data/cache/attach/ShunkunTyper2015/work.png'
-    system 'mv res.png work.png'
   end
 
   def speed_all
@@ -79,16 +99,14 @@ class MkPlots
     text="Typing speed [sec/20 words]"
     plot(all_data,text)
     plot(all_data,text,opts={:png=>true})
-    system 'mv res.png speed.png'
   end
 
   def speed_view(name)
     p name1 = "#{@source_dir}/#{name}_speed_data.txt"
     data0 = PlotData.new(name1, 0, 2, name)
-    #  start=Time.parse(data0.data[0][0])
     start=Time.parse(Time.now.to_s)
     x_func = proc{|x| ((Time.parse(x)-start)/3600/24) }
-    y_func = proc{|x| x }
+    y_func = proc{|y| y }
     data0.mk_plot_data(x_func,y_func)
     return data0
   end
@@ -108,7 +126,7 @@ class MkPlots
     data0.add_general_data(name1, 0, 2)
     start=Time.parse(Time.now.to_s)
     x_func = proc{|x| ((Time.parse(x)-start)/3600/24) }
-    y_func = proc{|x| x.to_f/60.0 }
+    y_func = proc{|y| y.to_f/60.0 }
     data0.mk_plot_data(x_func,y_func)
     data0.sort
     data0.sum_data

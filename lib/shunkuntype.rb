@@ -52,30 +52,33 @@ module Shunkuntype
     def data_viewing(form)
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
       p server_directory=server_info[0].chomp
-      system "scp -r #{server_directory} ."
-      # write data to file
-      table = MkSummary.new
-      MkPlots.new
-      p form ||= :html
-      case form
+      Dir.mktmpdir('shunkun'){|tmp_dir|
+        FileUtils.mkdir_p(File.join(tmp_dir,'mem_data'))
+        system "scp -r #{server_directory}/* #{tmp_dir}/mem_data"
+        # write data to file
+        table = MkSummary.new(tmp_dir)
+        MkPlots.new(tmp_dir)
+        p form ||= :html
+        case form
         when :html then
-        File.open('tmp.html','a'){|f|
-          f.write("<html>\n")
-          f.write(table.mk_html_table())
-          f.write("<p><img src=\"./work.png\" /></p>")
-          f.write("<p><img src=\"./speed.png\" /></p>")
-          f.write("</html>\n")
-        }
+          File.open('./tmp.html','a'){|f|
+            f.write("<html>\n")
+            f.write(table.mk_html_table())
+            f.write("<p><img src=\"./work.png\" /></p>")
+            f.write("<p><img src=\"./speed.png\" /></p>")
+            f.write("</html>\n")
+          }
         when :hiki then
-        File.open('tmp.hiki','a'){|f|
-          f.write(table.mk_hiki_table())
-          f.write('||{{attach_view(work.png)}}')
-          f.write('||{{attach_view(speed.png)}}')
-          f.write("\n")
-        }
+          File.open('./tmp.hiki','a'){|f|
+            f.write(table.mk_hiki_table())
+            f.write('||{{attach_view(work.png)}}')
+            f.write('||{{attach_view(speed.png)}}')
+            f.write("\n")
+          }
         else
-        exit
-      end
+
+        end
+      }
     end
   end
 end
