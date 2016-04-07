@@ -1,14 +1,20 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 require 'yard'
+require "rspec/core/rake_task"
 
-#task :default => :test
+RSpec::Core::RakeTask.new(:spec)
+
 task :default do
   system 'rake -T'
 end
 
-
-YARD::Rake::YardocTask.new
+desc "make documents by yard"
+task :yard do
+  system "hiki2md docs/readme.en.hiki > docs/README.en.md"
+  system "hiki2md docs/readme.ja.hiki > docs/README.ja.md"
+  YARD::Rake::YardocTask.new
+end
 
 Rake::TestTask.new(:test) do |test|
   test.libs << "test"
