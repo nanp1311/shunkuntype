@@ -11,8 +11,12 @@ end
 
 desc "make documents by yard"
 task :yard do
-  system "hiki2md docs/readme.en.hiki > docs/README.en.md"
-  system "hiki2md docs/readme.ja.hiki > docs/README.ja.md"
+  p command="hiki2md docs/readme.en.hiki > docs/README.en.md"
+  system command
+  p command="hiki2md docs/readme.ja.hiki > docs/README.ja.md"
+  system command
+  p command="mv docs/README.en.md ./README.md"
+  system command
   YARD::Rake::YardocTask.new
 end
 
@@ -23,10 +27,4 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-desc "setenv for release from Kwansei gakuin."
-task :setenv do
-  p command='setenv HTTP_PROXY http://proxy.ksc.kwansei.ac.jp:8080'
-  system command
-  p command='setenv HTTPS_PROXY http://proxy.ksc.kwansei.ac.jp:8080'
-  system command
-end
+
