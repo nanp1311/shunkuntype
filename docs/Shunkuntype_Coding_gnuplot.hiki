@@ -1,0 +1,58 @@
+{{toc}}
+!【名前】
+gnuplot
+!【概要】
+gnuplotを操作するためのrubyライブラリ
+!【install】
+ gem install gnuplot
+!【使用法】
+!!一つのグラフ
+<<< ruby
+  Gnuplot.open do |gp|
+    Gnuplot::Plot.new( gp ) do |plot|
+      plot.title  "Elapsed time vs #{text}"
+      plot.ylabel text
+      plot.xlabel "Elapsed time[days]"
+      plot.xtics "0 2"
+      x,y = data0.to_gnuplot
+
+      plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
+        ds.with = "line"
+        ds.notitle
+      end
+    end
+  end
+>>>
+
+!!複数のグラフの同時プロット
+<<< ruby
+  Gnuplot.open do |gp|
+    Gnuplot::Plot.new( gp ) do |plot|
+      plot.title  "Elapsed time vs #{text0}"
+      plot.ylabel text0
+      plot.xlabel "Elapsed time[days]"
+      plot.xtics "0 7"
+      if true==opts.has_key?(:png) then
+        plot.term "pngcairo enhanced size 480,360"
+        plot.output "res.png"
+      end
+
+      plot.data = []
+      data.each{|ele|
+        plot.data << Gnuplot::DataSet.new( ele.to_gnuplot ) do |ds|
+          ds.with = "line"
+          if ""==ele.title then
+            ds.notitle
+          else
+            ds.title=ele.title
+          end
+        end
+      }
+    end
+  end
+>>>
+*plot領域でグラフ全体に関する設定．
+*ds領域で一つ一つのプロットに関する設定
+**plot.dataに格納している．
+**dataには[[plot_data.rb|TouchTyping_Coding_PlotData]]で作成したPlotDataを配列に保存している．
+*:pngをオプションとして受け取った場合に，pngファイルを作成．

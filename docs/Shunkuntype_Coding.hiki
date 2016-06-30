@@ -1,0 +1,179 @@
+{{toc}}
+!【plotライブラリの導入】
+webのためのデータ加工において次のような変更を行った．
+* gnuplotライブラリの導入
+* PlotDataクラスの生成
+これにより，
+* 動作の目的別によるファイルの分離
+* 中間ファイルの省略
+などが達成され，記述の簡略化が相当進んだ．詳しくは[[Shunkuntype_Coding_gnuplot]],
+[[Shunkuntype_Coding_PlotData]]を参照．
+
+!【開発途中での使用の問題点】
+ユーザーの使用，特に情報の収集をしながら，コードの開発を行った．そのため以下のような不便さが出てきた．
+# どのversionを使用しているかで挙動が少しずつ変わる
+# どれが最新版かわからない
+# 最新版の更新をtgzでおこなった
+# 個人データを残すためcpで必要な書類を上書きする必要がある．
+このあたりこそChefの出番なのに，donkeyに不幸な事故が起こって．．．
+
+!【code記述の基本原則】
+動作はすべてrakeで指示するようにしている．これにより，
+* 操作法の一括化，標準化
+* ruby codeの分離
+** 環境に依存しやすいところはRakefile.rbで
+** 変わらないところを*.rbに
+という基本原則にのっとっている．
+
+しかし，個別の*.rbはsystem callから呼び出している．この代案としては，
+* requireして直接procを呼び出す
+* class化して隠蔽する
+が考えられる．class化による隠蔽によって細かいところを気にしなくても良くなる．しかし，隠蔽によってどのようにcodeが挙動するかがわからなくなり，codeをいじることが難しくなる．
+
+このcode整理はrubyの基本から逸脱している．これは，「見える化」によりどこに何があるかを明示する整理法に由来している．今後はこの基本原則をCoC化する方策を考える必要がある．
+
+!!!2016/02/14追記 
+このあたりのCoCがgemであることを実感．詳しくは[[Shunkuntype_gemizing]]を参照．
+
+!【directory構造と動作の概要】
+!!ユーザ環境
+ユーザ環境のdirectory構造は以下の通りである．
+<<< tcsh
+ShunkunType
+├── GerardStrong_data
+│   ├── STEP-01-home.txt
+│   ├── ・・・
+│   └── contents.txt
+├── Rakefile.rb
+├── data
+│   ├── STEP-1.txt
+│   ├── ・・・
+│   └── word.list
+├── finished_check.rb
+├── speed.rb
+├── speed_data.txt
+├── training.rb
+└── viewer.rb
+>>>
+Rakefile.rbに以下の動作が用意されており，各fileを起動するようにしている．
+<<< tcsh
+rake size    # start size training: Gerard Strong data
+rake speed   # speed check
+rake submit  # submit data to dmz0
+rake time    # start time training: one minite drills
+rake view    # view training history: display the finished step table and the graphs
+>>>
+動作の詳細は[[ユーザマニュアル|TouchTyping]]にある．
+!!Web集計環境
+Web集計環境のdirectory構造は以下の通りである．
+<<< tcsh
+Web/
+.
+├── Rakefile.rb
+├── ShunkunTyper2015
+├── mem_data
+│   ├── bob_speed_data.txt
+│   ├── bob_training_data.txt
+...
+├── mk_shunkunTyper.rb
+├── old_rbs
+│   ├── #Rakefile2.rb#
+...
+├── plot_data.rb
+└── res.png
+>>>
+Rakefile.rbに動作がすべて用意されている．
+<<< tcsh
+rake edit        # edit related hiki webs
+rake speed_all   # make speed graphs for all members
+rake speed_view  # make speed graphs for a specific member
+rake table       # make web table
+rake work_all    # view whole working time including speed_test for all members
+rake work_view   # view whole working time including speed_test for a specific member
+>>>
+
+!!! table
+tableによってmk_shunkunTyper.rbが起動され，
+* 個人のトレーニング履歴データをmem_dataにダウンロード
+* hiki形式でtableを作成，
+* ShunkunTyper2015に追加
+する．
+
+!!!speed, work, view, all
+speedおよびtrainingのデータをグラフ化する．rakeコマンドとして，
+ rake work_all
+とした場合には，speedおよびtrainingデータの作業時間を総計する．viewだけの場合は特定の被験者に対するグラフを作成．例えば，
+ rake speed_view donkey
+とした場合には，donkeyに関するspeedダータを表示．
+
+典型的なRakefile.rbでのデータ処理は以下の通り．
+<<< ruby
+desc "view whole working time including speed_test."
+task :work_all => [:mk_mem_names] do
+  all_data= $mem_names.inject([]){|all,name| all << work_view(name) }
+  text="Work minutes [min]"
+  plot(all_data,text)
+  plot(all_data,textopts={:png=>true})
+  exit
+end
+
+def work_view(name)
+  p name0 = "#{$source_dir}/#{name}_training_data.txt"
+  p name1 = "#{$source_dir}/#{name}_speed_data.txt"
+  data0 = PlotData.new(name0,0,3,name)
+  data0.add_general_data(name1, 0, 2)
+#  start=Time.parse(data0.data[0][0])
+  start=Time.parse(Time.now.to_s)
+  x_func = proc{|x| ((Time.parse(x)-start)/3600/24) }
+  y_func = proc{|x| x.to_f/60.0 }
+  data0.mk_plot_data(x_func,y_func)
+  data0.sort
+  data0.sum_data
+  return data0
+end
+>>>
+* all_dataにwork_viewを追加していく．
+** work_viewでは
+** file名を生成
+** data0をname0から作成し，name1からデータを追加．
+** x_func, y_funcでデータを修正
+** x軸をsort
+** y軸は積分値に変換
+* plotにall_dataを渡す．
+
+!!!edit
+関連するhikiページの編集環境をopen.
+
+!【dataの収集方法】
+練習記録データをどのように収集するかが最初の課題であった．一般的には，
+* 提出用のwebを設けてそこへ提出
+という方法が正当であろう．そのためのサイト構築には，
+* hiki
+* rails
+*cgi
+が考えられる．しかし，userが
+*いちいちあげる手数が面倒
+と思ってしまうと情報収集がスムースに進行しない．data収集後の操作は，
+*table作成
+*graph作成
+*webでの表示
+であるが，これらを自動化するために，hikiのpluginで実装するのも少し手間がかかる．
+
+そこでuser自身がscpによりwebの特定directoryにsubmitするという方法をとることにした．理由は以下の通り．
+* terminalでのtype練習をしているので，CGIでの操作が自然．
+* sshのアカウントを被験者全員が保有している
+* scp先のdirectoryのpermissionをworld writableにしてもだれがuploadするかの管理はできている．
+* scpで手元でdataを取れた方がgraphやtableの改良が容易．
+もちろんrubyによる自動化は用意されていて，
+<<< tcsh
+ rake submit
+>>>
+とuserは打ち込むだけにしている．
+<<< ruby
+desc "submit data to dmz0."
+task :submit do
+  dir ='/Users/bob/Sites/nishitani0/ShunkunTyper/mem_data'
+  system "scp ./training_data.txt #{true_name}@dmz0:#{dir}/#{true_name}_training_data.txt"
+  system "scp ./speed_data.txt #{true_name}@dmz0:#{dir}/#{true_name}_speed_data.txt"
+end
+>>>

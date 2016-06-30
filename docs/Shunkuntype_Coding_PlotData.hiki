@@ -1,0 +1,31 @@
+{{toc}}
+!【name】
+PlotData
+!【概要】
+数値データをrubyのgemとして用意されている[[gnuplot|TouchTyping_Coding_gnuplot]]で利用しやすいフォーマットに成型するクラス．
+!【使用例】
+<<< ruby
+  data0 = PlotData.new()
+  data0.read_general_data(ARGV[0], 0, 3)
+  data0.add_general_data(ARGV[1], 0, 2)
+
+  start=Time.parse(data0.data[0][0])
+  x_func = proc{|x| ((Time.parse(x)-start)/3600/24) }
+  y_func = proc{|x| x.to_f/60.0 }
+  data0.mk_plot_data(x_func,y_func)
+  data0.sort
+  data0.sum_data
+>>>
+としている．
+!【proc】
+!!initialize(file_name="",x_col=nil,y_col=nil,title="")
+!!add_general_data(file, x_col, y_col)
+!!read_general_data(file, x_col, y_col)
+!!to_gnuplot()
+[[gnuplot|TouchTyping_Coding_gnuplot]] libraryに沿った形でのdataを出力．
+!!mk_plot_data(x_func,y_func)
+x_func, y_funcに従って，x_col, y_colの値を変換する．
+!!sum_data
+y軸の値の積分を取る．
+!!sort
+x軸の値によってsortをかける．

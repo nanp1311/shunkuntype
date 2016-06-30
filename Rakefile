@@ -2,6 +2,8 @@ require "bundler/gem_tasks"
 require "rake/testtask"
 require 'yard'
 require "rspec/core/rake_task"
+p base_path = File.expand_path('..', __FILE__)
+p basename = File.basename(base_path)
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -11,12 +13,23 @@ end
 
 desc "make documents by yard"
 task :yard do
-  p command="hiki2md docs/readme.en.hiki > docs/README.en.md"
+  files = Dir.entries('docs')
+  files.each{|file|
+    name=file.split('.')
+    if name[1]=='hiki' then
+      p command="hiki2md docs/#{name[0]}.hiki > shunkuntype.wiki/#{name[0]}.md"
+      system command
+    end
+  }
+  p command="cp shunkuntype.wiki/readme_en.md ./README.md"
+  p command="cp shunkuntype.wiki/readme_ja.md shunkuntype.wiki/Home.md"
   system command
-  p command="hiki2md docs/readme.ja.hiki > docs/README.ja.md"
-  system command
-  p command="mv docs/README.en.md ./README.md"
-  system command
+  system "cp docs/*.gif #{basename}.wiki"
+  system "cp docs/*.gif doc"
+  system "cp docs/*.png #{basename}.wiki"
+  system "cp docs/*.png doc"
+  system "cp docs/*.pdf #{basename}.wiki"
+  system "cp docs/*.pdf doc"
   YARD::Rake::YardocTask.new
 end
 

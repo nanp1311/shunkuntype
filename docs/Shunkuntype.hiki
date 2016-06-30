@@ -1,0 +1,24 @@
+!TouchTypingに関連するサイト
+2015年度にshunkuntypeというtouch type習得ソフトを開発．
+
+!!使用法
+
+*[[マニュアル|Shunkuntype_manual]]
+*[[TouchTypingのコツ|http://www.plato-web.com/software/km06/lesson.html]]
+
+!!学習者向け報告書
+
+*[[レポート|Shunkuntype_report]]
+*[[shunkuntype報告書pdf版|shunkun_report.pdf]]
+
+!!開発メモ
+
+*[[gem化メモ|Shunkuntype_gemizing]]
+*[[yard文書|http://nishitani0.kwansei.ac.jp/~bob/nishitani0/rdocs/shunkuntype/]]
+*関連情報
+**[[2015秋のコード解説|TouchTyping_Coding]]
+**[[Shunkuntype_Coding_PlotData]]
+**[[Shunkuntype_Coding_gnuplot]]
+*開発＿通信(2016-02-18 08:10:56 +0900 by Bob)
+**sshでuser@host_uri設定をinitで
+**hikiに自動的に煽り場をつくるplugin
