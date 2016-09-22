@@ -1,11 +1,14 @@
-{{toc}}
-!【概要】
+! shunkuntypeのマニュアル
+
+!!【概要】
 touch typing習得をめざしたcommand line interface アプリ.  
-!【特徴】
+
+!!【特徴】
 * 軽い．
 * こまめな練習が可能な一分間練習．
 * 練習履歴のreportによる仲間内の「あおり」をおこなう工夫．
-!【操作法】
+
+!!【操作法】
 <<< tcsh
 bob% shunkuntype
 Shunkuntype says 'Hello world'.
@@ -19,12 +22,15 @@ Usage: shunkuntype [options]
         --review [TAG]               Review training, TAGs=html or hike
 >>>
 
-!【具体的な手順】
-!!インストール
+!!【具体的な手順】
+
+!!!インストール
 基本的な操作は全てterminalから行う．
-!!!基本の動作
+
+!!!!基本の動作
 shunkuntypeが使用する3個のdata(training, speed, server)は~/.shunkuntypeに保存される．
-!!! proxyの登録とserverの追加
+
+!!!! proxyの登録とserverの追加
 関学内ではgem installにproxyを通さないといけない．
 <<< tcsh
 for tcsh
@@ -34,11 +40,12 @@ for bash, zsh
 bob% export HTTP_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
 bob% export  HTTPS_PROXY=http://proxy.ksc.kwansei.ac.jp:8080
 >>>
-!!!install
+
+!!!!install
 gemがinstallするdirectoryのownerの権限によってはsudoが必要かもしれない．
  bob% sudo gem install shunkuntype
 
-!!スピードチェック(-c)
+!!!スピードチェック(-c)
 <<<tcsh
 bob% shunkuntype -c
 Shunkuntype says 'Hello world'.
@@ -56,7 +63,7 @@ require
 >>>
 で20文字を何秒で打てるかをチェックできる．
 
-!!one minute drill(-d)
+!!!one minute drill(-d)
 <<<tcsh
 bob% shunkuntype -d 5
 Shunkuntype says 'Hello world'.
@@ -72,7 +79,7 @@ deed did feed freed red deer
 >>>
 -dの後の引数で指定したNoのdrillを実行．
 
-!! reportのsubmit(-s)
+!!! reportのsubmit(-s)
 ./shunkuntype/server_data.txtに書かれた提出先server directoryに頭のユーザー名で保存される．
 <<<ruby
 bob% cat ~/.shunkuntype/server_data.txt
@@ -90,7 +97,7 @@ nishitani0のアカウントが必要．loginでうまくいかない時には�
 
 
 
-!! 練習履歴の表示(-h)
+!!! 練習履歴の表示(-h)
 練習履歴の表示は-hでされる．
 <<< tcsh
 bob% shunkuntype --history
@@ -110,5 +117,5 @@ hour | contents              | step
 To continue one minute training: shunkuntype -d 21.
 >>>
 
-!! 練習履歴の表示(-p)
+!!! 練習履歴の表示(-p)
 個人の練習履歴のグラフをplot．gnuplotがないとerrorとなる．

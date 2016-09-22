@@ -16,9 +16,8 @@
 *[[gem化メモ|Shunkuntype_gemizing]]
 *[[yard文書|http://nishitani0.kwansei.ac.jp/~bob/nishitani0/rdocs/shunkuntype/]]
 *関連情報
-**[[2015秋のコード解説|TouchTyping_Coding]]
-**[[Shunkuntype_Coding_PlotData]]
-**[[Shunkuntype_Coding_gnuplot]]
+**[[PlotData|Shunkuntype_Coding_PlotData]]
+**[[gnuplot|Shunkuntype_Coding_gnuplot]]
 *開発＿通信(2016-02-18 08:10:56 +0900 by Bob)
 **sshでuser@host_uri設定をinitで
 **hikiに自動的に煽り場をつくるplugin

@@ -24,9 +24,9 @@ task :yard do
   p command="cp shunkuntype.wiki/readme_en.md ./README.md"
   p command="cp shunkuntype.wiki/readme_ja.md shunkuntype.wiki/Home.md"
   system command
-  system "cp docs/*.gif #{basename}.wiki"
+  system "cp docs/*.gif #{basename}.wiki/img"
   system "cp docs/*.gif doc"
-  system "cp docs/*.png #{basename}.wiki"
+  system "cp docs/*.png #{basename}.wiki/img"
   system "cp docs/*.png doc"
   system "cp docs/*.pdf #{basename}.wiki"
   system "cp docs/*.pdf doc"

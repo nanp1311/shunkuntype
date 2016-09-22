@@ -76,9 +76,10 @@ end
 
 class MkPlots
 
-  def initialize(tmp_dir)
+  def initialize(tmp_dir,opts={})
     @source_dir=File.join(tmp_dir,'mem_data')
     @mem_names=[]
+    @opts = opts
     mk_mem_names()
     work_all()
     FileUtils.mv('res.png', './work.png')
@@ -97,6 +98,7 @@ class MkPlots
     mk_mem_names
     all_data= @mem_names.inject([]){|all,name| all << speed_view(name) }
     text="Typing speed [sec/20 words]"
+
     plot(all_data,text)
     plot(all_data,text,opts={:png=>true})
   end

@@ -1,51 +1,64 @@
-// TouchTyping_shunkuntype_gemizing
-{{toc}}
+!Shunkuntypeのgem化
 
-!目的
+!!目的
 shunkuntypeの配布を容易にするためgemを使って開発をすすめるためのメモ．
-!経緯
+!!経緯
 [[Shunkuntype_Coding]]にあるとおり，command line interfaceアプリとしてshunkuntypeは動作していた．しかし，幾つかの問題点があった．
+
 # 開発途中でuserによる検証を行っていたので，最新版のinstallに手間がかかる
 # install時に練習履歴などのdata fileをいちいち移行しないといけない．
 # Rakefile.rbから動くようにしていたため，
 ## 各々のプログラムを起動
 ## code filesが分散
 ## directory構造が定まっていない
+
 などである．
 
 そこでgem標準での開発に移行した．これによって
+
 # 標準的なgem installで最新版を常に維持可能
 # data fileと実行ファイルが別の場所にあるので，いちいち移行する必要がない
 # directory構造やoptparseによる標準的な記述が可能
+
 になった．また，
+
 * class化
+
 が強制されるためcodeの隠蔽やyardドキュメントでの参照がしやすくなった．
 
 ここで一つ懸念事項であった教材data filesの公開の是非は，
+
 * local serverを立てて，そこからdown load
+
 することで回避した．
 
 その他の設計思想は[[Shunkuntype_Coding]]を踏襲している．
 
-!!追補(2016/3/9)
+!!!追補(2016/3/9)
 瀬川杯のチョンボでむしゃくしゃしていたので，その勢いをshunkuntypeの公開に向けた．
+
 * rubygem.orgへの登録
 * githubへの公開
+
 が完了．
 
 方針は，todoのDB.prepareを参照して~/.shunkuntypeの下にすべてのdataをおいた．さらに，
 そこにserver_data.txtを置いて，server情報を明示している．review, submitなどがその情報を利用．
+
 <<< tcsh
 bob% cat ~/.shunkuntype/server_data.txt
 bob@dmz0:/Users/bob/Sites/nishitani0/ShunkunTyper/mem_data
 >>>
+
 としている．
 
 これにともない以下のinit周りもDataFilesに統合した．
+
 !!!立ち上げ(-i)
 練習，スピードデータを作成しておく必要がある．
  bob% shunkuntype --init
 過去のデータを移行は別に後述．
+
 !!! 過去のデータを移行(-i)
 gem化する前の古いshunkuntypeで練習していた人は，データを移行する必要がある．shunkuntype 1.0.1以降ではデータの名前が変更されているので注意．
 <<< tcsh
@@ -65,7 +78,7 @@ Shunkuntype says 'Hello world'.
 ./shunkuntype_training_data.txt exits.
 >>>
 
-! gem開発環境の構築
+!! gem開発環境の構築
 {{attach_anchor_string(「パーフェクトRuby」15章,PerfectRuby_c15_gems.pdf)}}を参照して作成していく．
 「パーフェクトRuby」ではtest駆動になっていなかったが，ある程度までは
 test駆動で進めたほうがよさそう．
@@ -74,15 +87,16 @@ test駆動で進めたほうがよさそう．
 ** DBを使うのが面倒なので，txtとする．その置き場はlocalにする．
 *追記：test駆動では，すでに開発が終了して，testが十分なされているコードの移植では無駄が多い．たんにクラス化して動作を確認する方が早い．
 
-!! bundle他の記述
+!!! bundle他の記述
  bob% bundle gem shunkuntype --test=minitest
 で必要なファイルが自動生成される．このあと，minitestをunit-testに変更する必要がある．
 詳しくは，[[RubyGems_development]]にある．
 
-!起動
+!!起動
 rakeからyardが動かせるように.
  <   spec.add_development_dependency "yard", "~> 0.8"
 をshunkuntype.gemspecに追加したあと，
+
 <<< tcsh
 bob% bundle install
 bob% bundle exec rake yard
@@ -93,10 +107,13 @@ Constants:       1 (    1 undocumented)
 Methods:         0 (    0 undocumented)
  0.00% documented
 >>>
+
 bundle installしないと，このdiretoryでbundleがyardを使えない．
 
-!!exe
+!!!exe
+
 exeがないので自動生成．conflictが起こっている時には'n'で飛ばした．
+
 <<< tcsh
 bob% bundle gem shunkuntype -b -t
 Creating gem 'shunkuntype'...
@@ -124,7 +141,9 @@ Overwrite /Users/bob/Ruby/shunkuntype/README.md? (enter "h" for help) [Ynaqdh] n
       create  shunkuntype/exe/shunkuntype
 Initializing git repo in /Users/bob/Ruby/shunkuntype
 >>>
+
 exe/shunkuntypeは
+
 <<< ruby
 #!/usr/bin/env ruby
 
@@ -132,7 +151,9 @@ require "shunkuntype"
 
 Shunkuntype::Command.run(ARGV)
 >>>
+
 となっている．shunkuntype.rbのclass Commandに以下の記述を追加．
+
 <<< ruby
     def self.run(argv=[])
         print "Hello world.\n"
@@ -143,14 +164,18 @@ Shunkuntype::Command.run(ARGV)
       @argv = argv
     end
 >>>
+
 すると
+
 <<< tcsh
 bob% bundle exec exe/shunkuntype 
 Hello world.
 >>>
+
 で動いていることが確認できる．あとは，これを普通に改良していくだけ．
 
-!!buildのための改良
+!!!buildのための改良
+
 <<< tcsh
 bob% bundle exec rake build
 rake aborted!
@@ -158,9 +183,11 @@ WARNING:  See http://guides.rubygems.org/specification-reference/ for help
 ERROR:  While executing gem ... (Gem::InvalidSpecificationException)
     ["Rakefile.rb"] are not files
 >>>
+
 なんで，
  ln -s Rakefile Rakefile.rb
 次に，
+
 <<< tcsh
 bob% bundle exec rake install:local
 rake aborted!
@@ -173,7 +200,9 @@ WARNING:  See http://guides.rubygems.org/specification-reference/ for help
 ERROR:  While executing gem ... (Gem::InvalidSpecificationException)
     missing value for attribute summary
 >>>
+
 なんで，
+
 <<< tcsh
 <   spec.summary       = %q{type training.}
 <   spec.description   = %q{type training for shunkun.}
@@ -183,7 +212,7 @@ ERROR:  While executing gem ... (Gem::InvalidSpecificationException)
 >>>
 とちゃんと書かんと．
 
-! gem serverの起動とcheck
+!! gem serverの起動とcheck
 公開できない可能性のあるアプリの開発のため，非公開のサーバを立てた場合の動作検証を進めておく．
 
 今は，http://nishitani0.kwansei.ac.jp/~bob/nishitani0/gems/に置いている．この下のgemsに作成したshunkuntype-0.1.0.gemを置くとgem searchで見つかる．
@@ -235,7 +264,7 @@ shunkuntype (0.1.0)
 >>>
 と無事見えた．
 
-!!install
+!!!install
 <<< tcsh
 bob% gem install shunkuntype
 Successfully installed shunkuntype-0.1.0
@@ -246,7 +275,9 @@ WARNING:  Unable to pull data from 'http://localhost:8080': bad response Gateway
 [bobsMacBookAir:~/Ruby/shunkuntype] bob% shunkuntype
 shunkuntype: Command not found.
 >>>
+
 で，がくっときたが，
+
 <<< tcsh
 bob% ls /usr/local/lib/ruby/gems/2.2.0/gems/shunkuntype-0.1.0/
 CODE_OF_CONDUCT.md   LICENSE.txt          Rakefile             bin/                 lib/
@@ -292,8 +323,10 @@ RubyGems Environment:
 >>>
 のEXECUTABLE DIRECTORYにinstallされる．sourceによるPATHのupdateを忘れずに．
 
-! shunkuntypeの移植
-!!shunkuntype.gemspecのfilesへの登録
+!! shunkuntypeの移植
+
+!!!shunkuntype.gemspecのfilesへの登録
+
 新しくcode filesを足していく．この時，gem buildでちゃんと認識するには，
 spec.filesに必要なファイルを足していく必要がある．
 
@@ -304,16 +337,18 @@ bundle gemで環境を作った場合，この操作は
  git commit
 などが必要．
 
-!!directoryの参照
+!!!directoryの参照
 shunkuntypeをどこにinstallあるいは，どこで起動されるかにかかわらずdataなどが
 適切に参照されるようにするために，
     data_dir=File.expand_path('../../../lib/data', __FILE__)
     file_name="#{data_dir}/STEP-47.txt"
 などとしている．ここでの__FILE__はexe/shunkuntypeが起点．
 
-!!optparse
+!!!optparse
+
 perfect rubyではsubcommandを扱うためにtodo/options.rbに二重構造のparseを使う例を示している．
 shunkuntypeでは一重でいいので，shunkuntype.rbに以下の通り記述．
+
 <<< ruby
     def execute
       @argv << '--help' if @argv.size==0
@@ -332,19 +367,23 @@ shunkuntypeでは一重でいいので，shunkuntype.rbに以下の通り記述�
       exit
     end
 >>>
+
 ここで[VAL]は「Integerの引数をとってもいい（とらなくてもいい）」ことを表している．この場合，Training.new(v)のvにはnilがはいって引き渡されるため，initialize(val=47)としてdefaultを
 定義できなかった．そこで，
+
 <<< ruby
   val ||= 47
 >>>
 としている．
 
-!!テスト環境の手順と注意
+!!!テスト環境の手順と注意
+
 テスト環境での検証を進めるときには，いちどbuildしたものをinstallする必要がある．server経由でinstallするとversionが変わらないと新たにinstallを行わない．buildではなく直接installすると最新版がversionの違いにかかわらずinstallされて動作検証が可能．
  bundle exec rake install
 では固まることがある．これは，ネット経由で通常のgemサーバーの情報を取ろうとしているため．
  bundle exec rake install:local
 でlocalのみにinstallされる．installしたのを直接叩いてテストすると便利．
-! 未対応
+
+!! 未対応
 * debugとpryのためにreadline versionを
 * referenceをlocalで参照できるように．

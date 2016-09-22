@@ -1,23 +1,25 @@
-{{toc}}
-!【plotライブラリの導入】
+!Shunkuntypeのコード開発
+!!【plotライブラリの導入】
 webのためのデータ加工において次のような変更を行った．
 * gnuplotライブラリの導入
 * PlotDataクラスの生成
 これにより，
 * 動作の目的別によるファイルの分離
 * 中間ファイルの省略
-などが達成され，記述の簡略化が相当進んだ．詳しくは[[Shunkuntype_Coding_gnuplot]],
-[[Shunkuntype_Coding_PlotData]]を参照．
+などが達成され，記述の簡略化が相当進んだ．詳しくは[[gnuplot|Shunkuntype_Coding_gnuplot]],
+[[PlotData|Shunkuntype_Coding_PlotData]]を参照．
 
-!【開発途中での使用の問題点】
+!!【開発途中での使用の問題点】
 ユーザーの使用，特に情報の収集をしながら，コードの開発を行った．そのため以下のような不便さが出てきた．
+
 # どのversionを使用しているかで挙動が少しずつ変わる
 # どれが最新版かわからない
 # 最新版の更新をtgzでおこなった
 # 個人データを残すためcpで必要な書類を上書きする必要がある．
+
 このあたりこそChefの出番なのに，donkeyに不幸な事故が起こって．．．
 
-!【code記述の基本原則】
+!!【code記述の基本原則】
 動作はすべてrakeで指示するようにしている．これにより，
 * 操作法の一括化，標準化
 * ruby codeの分離
@@ -33,10 +35,10 @@ webのためのデータ加工において次のような変更を行った．
 このcode整理はrubyの基本から逸脱している．これは，「見える化」によりどこに何があるかを明示する整理法に由来している．今後はこの基本原則をCoC化する方策を考える必要がある．
 
 !!!2016/02/14追記 
-このあたりのCoCがgemであることを実感．詳しくは[[Shunkuntype_gemizing]]を参照．
+このあたりのCoCがgemであることを実感．詳しくは[[gemizing|Shunkuntype_gemizing]]を参照．
 
-!【directory構造と動作の概要】
-!!ユーザ環境
+!!【directory構造と動作の概要】
+!!!ユーザ環境
 ユーザ環境のdirectory構造は以下の通りである．
 <<< tcsh
 ShunkunType
@@ -63,8 +65,8 @@ rake submit  # submit data to dmz0
 rake time    # start time training: one minite drills
 rake view    # view training history: display the finished step table and the graphs
 >>>
-動作の詳細は[[ユーザマニュアル|TouchTyping]]にある．
-!!Web集計環境
+動作の詳細は[[ユーザマニュアル|Shunkuntype_manual]]にある．
+!!!Web集計環境
 Web集計環境のdirectory構造は以下の通りである．
 <<< tcsh
 Web/
@@ -94,9 +96,11 @@ rake work_view   # view whole working time including speed_test for a specific m
 
 !!! table
 tableによってmk_shunkunTyper.rbが起動され，
+
 * 個人のトレーニング履歴データをmem_dataにダウンロード
 * hiki形式でtableを作成，
 * ShunkunTyper2015に追加
+
 する．
 
 !!!speed, work, view, all
@@ -107,6 +111,7 @@ speedおよびtrainingのデータをグラフ化する．rakeコマンドとし
 とした場合には，donkeyに関するspeedダータを表示．
 
 典型的なRakefile.rbでのデータ処理は以下の通り．
+
 <<< ruby
 desc "view whole working time including speed_test."
 task :work_all => [:mk_mem_names] do
@@ -132,6 +137,7 @@ def work_view(name)
   return data0
 end
 >>>
+
 * all_dataにwork_viewを追加していく．
 ** work_viewでは
 ** file名を生成
@@ -146,29 +152,42 @@ end
 
 !【dataの収集方法】
 練習記録データをどのように収集するかが最初の課題であった．一般的には，
+
 * 提出用のwebを設けてそこへ提出
+
 という方法が正当であろう．そのためのサイト構築には，
+
 * hiki
 * rails
 *cgi
+
 が考えられる．しかし，userが
+
 *いちいちあげる手数が面倒
+
 と思ってしまうと情報収集がスムースに進行しない．data収集後の操作は，
+
 *table作成
 *graph作成
 *webでの表示
+
 であるが，これらを自動化するために，hikiのpluginで実装するのも少し手間がかかる．
 
 そこでuser自身がscpによりwebの特定directoryにsubmitするという方法をとることにした．理由は以下の通り．
+
 * terminalでのtype練習をしているので，CGIでの操作が自然．
 * sshのアカウントを被験者全員が保有している
 * scp先のdirectoryのpermissionをworld writableにしてもだれがuploadするかの管理はできている．
 * scpで手元でdataを取れた方がgraphやtableの改良が容易．
+
 もちろんrubyによる自動化は用意されていて，
+
 <<< tcsh
  rake submit
 >>>
+
 とuserは打ち込むだけにしている．
+
 <<< ruby
 desc "submit data to dmz0."
 task :submit do

@@ -35,10 +35,26 @@ module Shunkuntype
         opt.on('-h', '--history','view training History') {|v| FinishCheck.new }
         opt.on('-p', '--plot','Plot personal data') { |v| PlotPersonalData.new }
         opt.on('-s', '--submit','Submit data to dmz0') { |v| report_submit()}
-        opt.on('--review [TAG]',[:html,:hiki],'Review training, TAGs=html or hiki'){|v| data_viewing(v)}
+        opt.on('--reset','reset training data') { |v| reset_data()}
+        opt.on('--review [FILE]','Review training, TAGs=html or hiki'){|v| data_viewing(v)}
       end
       command_parser.parse!(@argv)
       exit
+    end
+
+    def reset_data
+      data_dir = File.join(ENV['HOME'], '.shunkuntype')
+      FileUtils.cd(data_dir)
+      begin
+        FileUtils.mkdir('old_data',:verbose => true)
+      rescue Errno::EEXIST
+        print "Directory 'old_data' exists at #{data_dir}.\n\n"
+      end
+      time=Time.now.strftime("%Y%m%d%H%M%S")
+      ['speed_data','training_data'].each{|file|
+        target = File.join(data_dir,'old_data',"#{file}_#{time}.txt")
+        FileUtils.mv(file+'.txt',target,:verbose=>true)
+      }
     end
 
     def report_submit
@@ -49,7 +65,12 @@ module Shunkuntype
       system "scp #{Shunkuntype::SPEED_FILE} #{server_directory}/#{user_name}_speed_data.txt"
     end
 
-    def data_viewing(form)
+    def data_viewing(file)
+      # opts for MkPlots could be described in file 
+      # Not coded yet at all!!!
+      if file==nil then
+        opts = {}
+      end
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
       p server_directory=server_info[0].chomp
       Dir.mktmpdir('shunkun'){|tmp_dir|
@@ -58,27 +79,20 @@ module Shunkuntype
         system "scp -r #{server_directory}/* #{tmp_dir}/mem_data"
         # write data to file
         table = MkSummary.new(tmp_dir)
-        MkPlots.new(tmp_dir)
-        p form ||= :html
-        case form
-        when :html then
-          File.open('./tmp.html','a'){|f|
-            f.write("<html>\n")
-            f.write(table.mk_html_table())
-            f.write("<p><img src=\"./work.png\" /></p>")
-            f.write("<p><img src=\"./speed.png\" /></p>")
-            f.write("</html>\n")
-          }
-        when :hiki then
-          File.open('./tmp.hiki','a'){|f|
-            f.write(table.mk_hiki_table())
-            f.write('||{{attach_view(work.png)}}')
-            f.write('||{{attach_view(speed.png)}}')
-            f.write("\n")
-          }
-        else
-
-        end
+        MkPlots.new(tmp_dir,opts)
+        File.open('./tmp.html','a'){|f|
+          f.write("<html>\n")
+          f.write(table.mk_html_table())
+          f.write("<p><img src=\"./work.png\" /></p>")
+          f.write("<p><img src=\"./speed.png\" /></p>")
+          f.write("</html>\n")
+        }
+        File.open('./tmp.hiki','a'){|f|
+          f.write(table.mk_hiki_table())
+          f.write('||{{attach_view(work.png)}}')
+          f.write('||{{attach_view(speed.png)}}')
+          f.write("\n")
+        }
       }
     end
   end
