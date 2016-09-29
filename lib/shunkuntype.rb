@@ -7,6 +7,7 @@ require "shunkuntype/plot"
 require "shunkuntype/mk_summary"
 require "shunkuntype/plot_data"
 require "shunkuntype/db"
+require "shunkuntype/merge"
 require 'systemu'
 
 module Shunkuntype
@@ -58,15 +59,37 @@ module Shunkuntype
     end
 
     def report_submit
+      p 'report submission'
+      data_dir = File.join(ENV['HOME'], '.shunkuntype')
+      FileUtils.cd(data_dir)
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
-      p server_directory=server_info[0].chomp
-      p user_name=server_info[0].split('@')[0]
-      system "scp #{Shunkuntype::TRAIN_FILE} #{server_directory}/#{user_name}_training_data.txt"
-      system "scp #{Shunkuntype::SPEED_FILE} #{server_directory}/#{user_name}_speed_data.txt"
+      p @server_directory=server_info[0].chomp
+      p @user_name=server_info[0].split('@')[0]
+
+      ['training_data.txt','speed_data.txt'].each{|ext|
+        file_merge(ext)
+      }
+    end
+
+    def file_merge(ext_name)
+      file_name=ext_name
+      file_current = File.readlines(file_name)
+      tmp_file = File.open("./tmp_data.txt",'w')
+      sta, out, stderror = systemu "scp #{@server_directory}/#{@user_name}_#{ext_name} ."
+      if stderror.split(":")[2] != " No such file or directory\n" then
+        file_server = File.readlines("#{@user_name}_#{ext_name}")
+        tmp_file.print data_merge(file_current,file_server)
+      else
+        p " No such file or directory in server.\n"
+        tmp_file.print file_current.join
+      end
+      tmp_file.close
+      system "cat tmp_data.txt"
+      system "scp tmp_data.txt #{@server_directory}/#{@user_name}_#{ext_name}"
     end
 
     def data_viewing(file)
-      # opts for MkPlots could be described in file 
+      # opts for MkPlots could be described in file
       # Not coded yet at all!!!
       if file==nil then
         opts = {}
