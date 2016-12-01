@@ -62,10 +62,14 @@ module Shunkuntype
       p 'report submission'
       data_dir = File.join(ENV['HOME'], '.shunkuntype')
       FileUtils.cd(data_dir)
+      unless File.exists?(Shunkuntype::SERVER_FILE)
+        puts "Input server_directory?:"
+        @server_directory=gets.chomp
+        File.open(Shunkuntype::SERVER_FILE).print(@server_directory)
+      end
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
       p @server_directory=server_info[0].chomp
       p @user_name=server_info[0].split('@')[0]
-
       ['training_data.txt','speed_data.txt'].each{|ext|
         file_merge(ext)
       }
