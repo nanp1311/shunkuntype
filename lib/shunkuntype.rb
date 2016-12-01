@@ -80,7 +80,7 @@ module Shunkuntype
       file_current = File.readlines(file_name)
       tmp_file = File.open("./tmp_data.txt",'w')
       sta, out, stderror = systemu "scp #{@server_directory}/#{@user_name}_#{ext_name} ."
-      if stderror.split(":")[2] != " No such file or directory\n" then
+      unless stderror.include?(" No such file or directory") then
         file_server = File.readlines("#{@user_name}_#{ext_name}")
         tmp_file.print data_merge(file_current,file_server)
       else
