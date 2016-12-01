@@ -63,9 +63,9 @@ module Shunkuntype
       data_dir = File.join(ENV['HOME'], '.shunkuntype')
       FileUtils.cd(data_dir)
       unless File.exists?(Shunkuntype::SERVER_FILE)
-        puts "Input server_directory?:"
-        @server_directory=gets.chomp
-        File.open(Shunkuntype::SERVER_FILE).print(@server_directory)
+        print "Input server_directory?:"
+        p        tmp = gets
+        File.open(Shunkuntype::SERVER_FILE,'w'){|f| f.print(tmp) }
       end
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
       p @server_directory=server_info[0].chomp
