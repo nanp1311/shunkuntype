@@ -60,11 +60,11 @@ module Shunkuntype
 
     def report_submit
       p 'report submission'
-      data_dir = File.join(ENV['HOME'], '.shunkuntype')
+      p data_dir = File.join(ENV['HOME'], '.shunkuntype')
       FileUtils.cd(data_dir)
       unless File.exists?(Shunkuntype::SERVER_FILE)
         print "Input server_directory?:"
-        p        tmp = gets
+        p tmp = gets
         File.open(Shunkuntype::SERVER_FILE,'w'){|f| f.print(tmp) }
       end
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
@@ -80,6 +80,7 @@ module Shunkuntype
       file_current = File.readlines(file_name)
       tmp_file = File.open("./tmp_data.txt",'w')
       sta, out, stderror = systemu "scp #{@server_directory}/#{@user_name}_#{ext_name} ."
+      p stderror
       unless stderror.include?(" No such file or directory") then
         file_server = File.readlines("#{@user_name}_#{ext_name}")
         tmp_file.print data_merge(file_current,file_server)
