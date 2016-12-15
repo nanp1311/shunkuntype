@@ -49,6 +49,7 @@ EOF
   def exec_speed_check(data)
     print "\n\n"+number.to_s+" words should be cleared."
     print "\nType return-key to start."
+    p ''
     line=$stdin.gets
 
     t0=Time.now
@@ -60,6 +61,7 @@ EOF
       count+=word.length
       while line!=word do
         puts word
+        p ''
         line=$stdin.gets.chomp
       end
     end
