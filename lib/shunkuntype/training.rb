@@ -11,7 +11,6 @@ class Training
     @time_flag=true
     print_keyboard
     start_time,data=init_proc(file_name)
-    p ''
     #size_training(file_name,data,start_time)
     time_training(base_name,data,start_time)
   end
@@ -31,6 +30,15 @@ class Training
     puts @counter
   end
 
+  # time loop
+  def loop_thread(sec)
+    Thread.start(sec) do |wait_time|
+      sleep wait_time
+      puts "\a Time up. Type return-key to finish.."
+      @time_flag=false
+    end
+  end
+
   # print key positions
   def print_keyboard
     content = <<-EOF
@@ -45,7 +53,6 @@ EOF
     data=File.readlines(file_name)
     data.each{|word| print word }
     print "\nRepeat above sentences. Type return-key to start."
-    p ''
     line=STDIN.gets
     start_time = Time.now
     return start_time,data
@@ -61,7 +68,6 @@ EOF
     data.each do |sentence|
       break if @time_flag == false
       puts sentence
-      p ""
       line=STDIN.gets.chomp
       counter(sentence,line)
     end
@@ -71,15 +77,6 @@ EOF
     type_loop(data)
     exit_proc(start_time,file_name,(Time.now-start_time).to_i)
     return
-  end
-
-  # time loop
-  def loop_thread(sec)
-    Thread.start(sec) do |wait_time|
-      sleep wait_time
-      p "\a Time up. Type return-key to finish.."
-      @time_flag=false
-    end
   end
 
   def time_training(base_name,data,start_time)
