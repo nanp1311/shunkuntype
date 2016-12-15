@@ -53,6 +53,7 @@ EOF
     data=File.readlines(file_name)
     data.each{|word| print word }
     print "\nRepeat above sentences. Type return-key to start."
+    p ''
     line=STDIN.gets
     start_time = Time.now
     return start_time,data
@@ -68,6 +69,7 @@ EOF
     data.each do |sentence|
       break if @time_flag == false
       puts sentence
+      p ''
       line=STDIN.gets.chomp
       counter(sentence,line)
     end
