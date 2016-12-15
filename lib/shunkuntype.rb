@@ -72,6 +72,7 @@ module Shunkuntype
       p @user_name=server_info[0].split('@')[0]
       ['training_data.txt','speed_data.txt'].each{|ext|
         file_merge(ext)
+        system "scp tmp_data.txt #{ext}"
       }
     end
 
