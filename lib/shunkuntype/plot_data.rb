@@ -82,16 +82,16 @@ class MkPlots
     @opts = opts
     mk_mem_names()
     work_all()
-    FileUtils.mv('res.png', './work.png')
+#    FileUtils.mv('res.png', './work.png')
     speed_all()
-    FileUtils.mv('res.png', './speed.png')
+#    FileUtils.mv('res.png', './speed.png')
   end
 
   def work_all
     all_data= @mem_names.inject([]){|all,name| all << work_view(name) }
     text="Work minutes [min]"
     plot(all_data,text)
-    plot(all_data,text,opts={:png=>true})
+#    plot(all_data,text,opts={:png=>true})
   end
 
   def speed_all
@@ -100,7 +100,7 @@ class MkPlots
     text="Typing speed [sec/20 words]"
 
     plot(all_data,text)
-    plot(all_data,text,opts={:png=>true})
+#    plot(all_data,text,opts={:png=>true})
   end
 
   def speed_view(name)
@@ -142,6 +142,7 @@ class MkPlots
         plot.ylabel text0
         plot.xlabel "Elapsed time[days]"
         plot.xtics "0 7"
+        plot.xrange "[-49:1]"
         if true==opts.has_key?(:png) then
           plot.term "pngcairo enhanced size 480,360"
           plot.output "res.png"
