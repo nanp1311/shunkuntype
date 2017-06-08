@@ -141,7 +141,7 @@ class MkPlots
         plot.title  "Elapsed time vs #{text0}"
         plot.ylabel text0
         plot.xlabel "Elapsed time[days]"
-        plot.xtics "0 7"
+        plot.xtics "7"
         plot.xrange "[-49:1]"
         if true==opts.has_key?(:png) then
           plot.term "pngcairo enhanced size 480,360"
