@@ -23,6 +23,7 @@ class MkSummary
       p name
       speed_file="#{name}_speed_data.txt"
       if files.include?(speed_file)
+        p speed_file
         file = File.readlines(File.join($mem_dir,speed_file))
         init= (file[0]!=nil ? file[0].split(",")[2].to_f : 0.0 )
         cur = (file[-1]!=nil ? file[-1].split(",")[2].to_f : 0.0 )
@@ -30,6 +31,7 @@ class MkSummary
       end
       training_file="#{name}_training_data.txt"
       if files.include?(training_file)
+        p training_file
         file = File.readlines(File.join($mem_dir,training_file))
         work_time = file.inject(0){|sum,line|
           sec=line.split(',')[3].to_i

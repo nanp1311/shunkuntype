@@ -29,12 +29,16 @@ class PlotData
   end
 
   def read_general_data(file, x_col, y_col)
-    File.open(file,'r'){|file|
-      while line=file.gets do
-        tmp=line.chomp.split(',')
-        @data << [tmp[x_col],tmp[y_col]]
-      end
-    }
+    begin
+      File.open(file,'r'){|file|
+        while line=file.gets do
+          tmp=line.chomp.split(',')
+          @data << [tmp[x_col],tmp[y_col]]
+        end
+      }
+    rescue => e
+      p e
+    end
   end
 # @!endgroup
 
@@ -82,16 +86,15 @@ class MkPlots
     @opts = opts
     mk_mem_names()
     work_all()
-#    FileUtils.mv('res.png', './work.png')
     speed_all()
-#    FileUtils.mv('res.png', './speed.png')
   end
 
   def work_all
-    all_data= @mem_names.inject([]){|all,name| all << work_view(name) }
+    all_data= @mem_names.inject([]){|all,name|
+      all << work_view(name)
+    }
     text="Work minutes [min]"
     plot(all_data,text)
-#    plot(all_data,text,opts={:png=>true})
   end
 
   def speed_all
@@ -100,11 +103,10 @@ class MkPlots
     text="Typing speed [sec/20 words]"
 
     plot(all_data,text)
-#    plot(all_data,text,opts={:png=>true})
   end
 
   def speed_view(name)
-    p name1 = "#{@source_dir}/#{name}_speed_data.txt"
+    name1 = "#{@source_dir}/#{name}_speed_data.txt"
     data0 = PlotData.new(name1, 0, 2, name)
     start=Time.parse(Time.now.to_s)
     x_func = proc{|x| ((Time.parse(x)-start)/3600/24) }
