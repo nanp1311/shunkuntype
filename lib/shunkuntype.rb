@@ -102,8 +102,8 @@ module Shunkuntype
       end
       server_info=File.readlines(Shunkuntype::SERVER_FILE)
       p server_directory=server_info[0].chomp
-#      Dir.mktmpdir('shunkun'){|tmp_dir|
-      ['tmp_dir'].each{|tmp_dir|
+      Dir.mktmpdir('shunkun'){|tmp_dir|
+#      ['tmp_dir'].each{|tmp_dir|
         p tmp_dir
         FileUtils.mkdir_p(File.join(tmp_dir,'mem_data'))
         system "scp -r #{server_directory}/* #{tmp_dir}/mem_data"
