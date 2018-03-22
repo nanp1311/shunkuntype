@@ -2,7 +2,7 @@ class Training
   def initialize(val_i)
     val_i ||= 47
     data_dir=File.expand_path('../../../lib/data', __FILE__)
-    base_name="STEP-#{val_i}.txt"
+    p base_name="STEP-#{val_i}.txt"
     file_name=File.join(data_dir,base_name)
 
     @period = 60
@@ -53,7 +53,7 @@ EOF
     data=File.readlines(file_name)
     data.each{|word| print word }
     print "\nRepeat above sentences. Type return-key to start."
-    p ''
+#    p ''
     line=STDIN.gets
     start_time = Time.now
     return start_time,data
@@ -69,7 +69,7 @@ EOF
     data.each do |sentence|
       break if @time_flag == false
       puts sentence
-      p ''
+#      p ''
       line=STDIN.gets.chomp
       counter(sentence,line)
     end

@@ -107,7 +107,7 @@ module Shunkuntype
         p tmp_dir
         FileUtils.mkdir_p(File.join(tmp_dir,'mem_data'))
         system "scp -r #{server_directory}/* #{tmp_dir}/mem_data"
-        table = MkSummary.new(tmp_dir)         # read data from files
+p       table = MkSummary.new(tmp_dir)         # read data from files
         MkPlots.new(tmp_dir,opts)
         File.open('./tmp.html','a'){|f|
           f.write("<html>\n")
