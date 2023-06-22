@@ -35,15 +35,10 @@ EOF
   def mk_random_words
     data=[]
     data_dir=File.expand_path('../../../lib/data', __FILE__)
-    #    file=open("#{data_dir}/word.list",'r')
     file=open("#{data_dir}/nakata.list",'r')
     File.readlines(file).each do |line|
-      p line
-      #      data << word.chomp
-      #            data << line.scan(/(.+)\s+/)[0]
-      p line.match(/(.+) /)
+      data << line.match(/(\w+)\s+/)[1]
     end
-    exit
     data.shuffle!
     data.each do |word|
       print word+" "
