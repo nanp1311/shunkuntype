@@ -38,6 +38,7 @@ EOF
     #    file=open("#{data_dir}/word.list",'r')
     file=open("#{data_dir}/nakata.list",'r')
     File.readlines(file).each do |line|
+      p line
       #      data << word.chomp
       #            data << line.scan(/(.+)\s+/)[0]
       p line.match(/(.+) /)

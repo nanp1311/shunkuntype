@@ -29,9 +29,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "systemu", "~>2.5.1"
   spec.add_dependency "gnuplot"
-  spec.add_development_dependency "bundler", "~> 2.2.10"
-  spec.add_development_dependency "rake", "~> 12.3.3"
-  spec.add_development_dependency "yard", "~> 0.9.11"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+#  spec.add_development_dependency "yard"
 #  spec.add_development_dependency "test-unit"
   spec.add_development_dependency "rspec"
 end
