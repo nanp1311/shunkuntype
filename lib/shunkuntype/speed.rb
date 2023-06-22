@@ -40,7 +40,7 @@ EOF
     File.readlines(file).each do |line|
       #      data << word.chomp
       #            data << line.scan(/(.+)\s+/)[0]
-      p line.match(/(.+)\s/)
+      p line.match(/(.+)\s*/)
     end
     exit
     data.shuffle!
