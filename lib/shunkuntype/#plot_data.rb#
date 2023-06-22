@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 require 'time'
 require 'fileutils'
-# require "gnuplot"
+#bundler: failed to load command: exe/shunkuntype (exe/shunkuntype)
+/home/nanp/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/gnuplot-2.6.2/lib/gnuplot.rb:6:in `require': cannot load such file -- matrix (LoadError)
+        from /home/nanp/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/gnuplot-2.6.2/lib/gnuplot.rb:6:in `<top (required)>'
+        from /home/nanp/shunkuntype/lib/shunkuntype/plot_data.rb:4:in `require'
+        from /home/nanp/shunkuntype/lib/shunkuntype/plot_data.rb:4:in `<top (required)>' require "gnuplot"
 
 # = gnuplotが扱えるデータフォーマットへの変換
 # ==Usage
