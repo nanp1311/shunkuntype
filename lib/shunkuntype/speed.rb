@@ -1,3 +1,4 @@
+# coding: utf-8
 
 class SpeedCheck
   attr_reader :number, :period
@@ -13,7 +14,7 @@ EOF
   end
 
   def initialize
-    @number = 5 #default 20
+    @number = 20 #default 20
     @period = 60
     check_data_files
     data = mk_random_words
@@ -37,13 +38,11 @@ EOF
     example=[]
     data_dir=File.expand_path('../../../lib/data', __FILE__)
     file=open("#{data_dir}/nanp.list",'r')
-#    file=open("#{data_dir}/word.list",'r')
     File.readlines(file).each do |line|
-      data << line #.match(/(\w+)\s+#(.+)/)[1]
+      data << line
       example << line.match(/(\w+)\s+#(.+)/)[1]
     end
     data.shuffle!
-#    data.each do |word|
     example.each do |word|
       print word+" "
     end
@@ -51,7 +50,11 @@ EOF
   end
 
   def exec_speed_check(data)
+    
+
     print "\n\n"+number.to_s+" words should be cleared."
+    print "\nmode[J or E]: "
+    mode=$stdin.gets.chomp
     print "\nType return-key to start."
     p ''
     line=$stdin.gets
@@ -61,9 +64,9 @@ EOF
     @number.times do |i|
       print_keyboard()
       puts (i+1).to_s
-      word_mean = data[i].match(/(\w+)\s+#(.+)/)[1]+" "+data[i].match(/(\w+)\s+#(.+)/)[2]
-      word = data[i].match(/(\w+)\s+#(.+)/)[1]
-      mean = data[i].match(/(\w+)\s+#(.+)/)[2]
+      word_mean = data[i].match(/(\w+)\s+#(.+)/)[1]+" "+data[i].match(/(\w+)\s+#(.+)/)[2] #単語+意味
+      word = data[i].match(/(\w+)\s+#(.+)/)[1] #単語のみ
+      mean = data[i].match(/(\w+)\s+#(.+)/)[2] #意味のみ
       count+=word.length
       while line!=word do
         puts word_mean
