@@ -57,7 +57,7 @@ migrate	      #[動]移住する、移植する__memo:
 binary	      #[名]2進法、機械語__memo: 
 octal	      #[名]8進法__memo: 
 decimal	      #[名]10進法__memo: 
-hexadecimal   #[名]16進法___memo: 
+hexadecimal   #[名]16進法__memo: 
 format	      #[名]型、ファイル形式__memo: 
 store	      #[動]データを蓄える、貯蓄__memo: 
 asset	      #[名]資産__memo: 
