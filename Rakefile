@@ -1,6 +1,6 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
-require 'yard'
+# require 'yard'
 require "rspec/core/rake_task"
 p base_path = File.expand_path('..', __FILE__)
 p basename = File.basename(base_path)
