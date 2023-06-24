@@ -15,7 +15,7 @@ return	      #[動]戻る
 default	      #[名]初期状態
 interface     #[名]境界面、約束事
 commit	      #[動]引っ込みがつかない約束をする、確約する
-contain	      #[動]包み込む
+contain	      #[動]包み込む、包含する、含む
 include	      #[動]含む、取り込む
 length	      #[名]文字列の数や配列の個数
 size	      #[名]データの大きさ、配列などの個数
