@@ -12,14 +12,14 @@ error	      #[名]致命的な欠陥__memo:
 push	      #[名]最後尾へ追加する__memo: 
 pull	      #[動]引っ張る__memo: 
 return	      #[動]戻る__memo: 
-default	      #[名]初期状態__memo: 
+default	      #[名]初期状態__memo: 初期値
 interface     #[名]境界面、約束事__memo: 
 commit	      #[動]引っ込みがつかない約束をする、確約する__memo: 
 contain	      #[動]包み込む、包含する、含める__memo: 
 include	      #[動]含む、取り込む__memo: 
 length	      #[名]文字列の数や配列の個数__memo: 
 size	      #[名]データの大きさ、配列などの個数__memo: 
-range	      #[名]幅、守備範囲__memo: 
+range	      #[名]幅、守備範囲__memo: 範囲
 join	      #[動]参加する、結合する__memo: 
 union	      #[名]合体、和、和集合__memo: 
 merge	      #[動]ひとつにする__memo: 
@@ -29,7 +29,7 @@ relation      #[名]関係、テーブル間のつながり、rel__memo:
 association   #[名]つながり、協会__memo: 
 evidence      #[名]キャプチャ、根拠__memo: 
 pending	      #[名]保留__memo: 
-domein	      #[名]領域__memo: 
+domein	      #[名]領域__memo: domain??
 generate      #[動]時間と労力をかけて生み出す、gen__memo: 
 fetch	      #[動]行って取ってくる__memo: 
 factory	      #[名]インスタンスを生成する工場__memo: 
@@ -39,12 +39,12 @@ skip	      #[動]処理を飛ばす__memo:
 continue      #[動]処理を続行する__memo: 
 next	      #[動]次の繰り返しに移る、右矢印__memo: 
 development   #[名]開発、dev__memo: 
-progress      #[動]進行する__memo: 
-complete      #[動]正常に完了する__memo: 
+progress      #[動]進行する__memo: 進歩する
+complete      #[動]正常に完了する__memo: ミッションコンプリート
 launch	      #[動]アプリを起動する、サービスを開始する__memo: 
 implement     #[動]実装する__memo: 
-sanitise      #[動]解毒する、無害化する__memo: 
-blank	      #[形]文字が書かれていない、空欄の__memo: 
+sanitise      #[動]解毒する、無害化する__memo: 元々はトイレの掃除
+blank	      #[形]文字が書かれていない、空欄の__memo: 空白
 remove	      #[動]取り除く、削除する__memo: 
 quit	      #[動]やめる、アプリを終了する__memo: 
 exit	      #[動](プログラムから)脱出する__memo: 
@@ -61,7 +61,7 @@ hexadecimal   #[名]16進法__memo:
 format	      #[名]型、ファイル形式__memo: 
 store	      #[動]データを蓄える、貯蓄__memo: 
 asset	      #[名]資産__memo: 
-dump	      #[動]データを出力する__memo: 
+dump	      #[動]データを出力する__memo: ダンプカーがごそっと落とすイメージ
 result	      #[名]計算結果、結果セット__memo: 
 row	      #[名]行__memo: 
 column	      #[名]列、col__memo: 
@@ -71,7 +71,7 @@ analyze	      #[動]分析する__memo:
 alter	      #[動]スキーマに変更を加える__memo: 
 convert	      #[動]ファイルの形式やサイズを変える、conv__memo: 
 parse	      #[動]構文解析する、変換する__memo: 
-populate      #[動]データで埋める__memo: 
+populate      #[動]データで埋める__memo: これ知らん
 cascade	      #[名]連鎖反応__memo: 
 pluck	      #[動]摘み取る__memo: 
 mutation      #[名]変異__memo: 
@@ -87,45 +87,45 @@ map	      #[動]対応づける__memo:
 function      #[名]関数、func__memo: 
 define	      #[動]定義する、def__memo: 
 strict	      #[形]厳格モード__memo: 
-local	      #[形]地方の、閉じた空間の__memo: 
-global	      #[形]誰からでも見える__memo: 
-scope	      #[名]範囲、スコープ__memo: 
+local	      #[形]地方の、閉じた空間の__memo: 局所的
+global	      #[形]誰からでも見える__memo: 大域的
+scope	      #[名]範囲、スコープ__memo: 見える範囲
 refer	      #[動]参照する__memo: 
 annotate      #[動]注釈を付ける__memo: 
-schema	      #[名]スキーマ、概要__memo: 
+schema	      #[名]スキーマ、概要__memo: 枠組かな？
 environment   #[名]環境、env__memo: 
 status	      #[名]時間で変化する状況__memo: 
 initialize    #[動]初期化する、init__memo: 
 layout	      #[名]配置、外側の共通部分__memo: 
 offset	      #[名]ファイル内の現在位置__memo: 
 locale	      #[名]各地域用の設定__memo: 
-feature	      #[名]アプリの新しい目玉機能__memo: 
-trait	      #[名]特徴、性格__memo: 
+feature	      #[名]アプリの新しい目玉機能__memo: 特徴->性格
+trait	      #[名]特徴、性格__memo: 特色
 context	      #[名]背景、文脈、コンテキスト__memo: 
 current	      #[形]いま対象としている、いま乗っている文脈上の__memo: 
 async	      #[形]非同期の、個々が独立している__memo: 
 temporary     #[形]一時的な、tmp__memo: 
 state	      #[名]状態__memo: 
-property      #[名]所有物、プロパティ、prop__memo: 
-finally	      #[副]実行を保証する__memo: 
+property      #[名]所有物、プロパティ、prop__memo: 性質
+finally	      #[副]実行を保証する__memo: 最後の
 entry	      #[名]プログラムの起点、見出し、登録事項__memo: 
 allow	      #[動]入場を許可する__memo: 
 permit	      #[動]実行を許可する__memo: 
-authorization #[名]パワー(権威)の授与、認可、auth__memo: 
+authorization #[名]パワー(権威)の授与、認可、auth__memo: 権限付与
 private	      #[動]私的な、直接見られない__memo: 
-public	      #[形]公の窓口の__memo: 
-meta	      #[形]二次元の、高次元の__memo: 
+public	      #[形]公の窓口の__memo: 公的
+meta	      #[形]二次元の、高次元の__memo: ベタの反対
 require	      #[動]必要とする__memo: 
 depend	      #[動]依存する__memo: 
 request	      #[名]要求、リクエスト__memo: 
-invalid	      #[形](法的に)受け入れられない__memo: 
-flush	      #[動]バッファないのデータを掃き出す__memo: 
+invalid	      #[形](法的に)受け入れられない__memo: validでない
+flush	      #[動]バッファないのデータを掃き出す__memo: 内の
 dispatch      #[動]送る、急いで送り出す__memo: 
-render	      #[動]送り返す__memo: 
+render	      #[動]送り返す__memo: 芸術的に解釈する-> 文字データを画像など
 submit	      #[動]提出する、送信する__memo: 
 yield	      #[動]制御を譲る__memo: 
 assign	      #[動]あてがう、代入する__memo: 
-alert	      #[名]異常の通知__memo: 
+alert	      #[名]異常の通知__memo: 警告
 exception     #[名]例外__memo: 
 assert	      #[動]主張する__memo: 
 send	      #[動]送る、伝える__memo: 
@@ -140,7 +140,7 @@ select	      #[動]選択する__memo:
 limit	      #[名]リミット、限度__memo: 
 match	      #[動]一致する、マッチする__memo: 
 process	      #[名]プロセス、proc__memo: 
-task	      #[名]処理の単位、割り当てられた務め__memo: 
+task	      #[名]処理の単位、割り当てられた務め__memo: 仕事
 service	      #[名]サービス__memo: 
 execute	      #[動]実行する、exe__memo: 
 kill	      #[動]プロセスを止める__memo: 
