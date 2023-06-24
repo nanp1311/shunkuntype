@@ -42,7 +42,7 @@ EOF
     end
     data.shuffle!
     data.each do |word|
-      print word+" "
+      print word+"hoge "
     end
     return data
   end
