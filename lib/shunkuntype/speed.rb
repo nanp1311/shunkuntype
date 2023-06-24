@@ -39,7 +39,7 @@ EOF
     file=open("#{data_dir}/nanp.list",'r')
 #    file=open("#{data_dir}/word.list",'r')
     File.readlines(file).each do |line|
-      data << line.match(/(\w+)\s+#(.+)/)[1]
+      data << line #.match(/(\w+)\s+#(.+)/)[1]
       example << line.match(/(\w+)\s+#(.+)/)[1]
     end
     data.shuffle!
@@ -62,7 +62,7 @@ EOF
       print_keyboard()
       puts (i+1).to_s
 #      word = data[i]
-    p   word = data[i].scan(/(\w+)\s+#(.+)/)[1]
+     p  word = data[i].scan(/(\w+)\s+#(.+)/)[1]
 #      mean = data.match(/(\w+)\s+#(.+)/)[2]
       exit()
       count+=word.length
