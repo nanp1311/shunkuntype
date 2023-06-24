@@ -60,6 +60,7 @@ EOF
       puts "error"
       print "\nmode[J, E, T]: "
       mode=$stdin.gets.chomp
+      p mode
     end
     print "\nType return-key to start."
     p ''
