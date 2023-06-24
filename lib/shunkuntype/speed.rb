@@ -1,4 +1,5 @@
 # coding: utf-8
+1# coding: utf-8
 
 class SpeedCheck
   attr_reader :number, :period
@@ -41,7 +42,7 @@ EOF
     file = open("#{data_dir}/nanp.list", "r")
     File.readlines(file).each do |line|
       data << line
-      example << line.match(/(\w+)\s+#(.+)_.+/)[1]
+      example << line.match(/(\w+)\s+#(.+)__.+/)[1]
     end
     data.shuffle!
     example.each do |word|
@@ -68,9 +69,9 @@ EOF
     @number.times do |i|
       print_keyboard()
       puts (i + 1).to_s
-      word_mean = data[i].match(/(\w+)\s+#(.+)_.+/)[1] + " " + data[i].match(/(\w+)\s+#(.+)_.+/)[2] #単語+意味
-      word = data[i].match(/(\w+)\s+#(.+)_.+/)[1] #単語のみ
-      mean = data[i].match(/(\w+)\s+#(.+)_.+/)[2] #意味のみ
+      word_mean = data[i].match(/(\w+)\s+#(.+)__.+/)[1] + " " + data[i].match(/(\w+)\s+#(.+)__.+/)[2] #単語+意味
+      word = data[i].match(/(\w+)\s+#(.+)__.+/)[1] #単語のみ
+      mean = data[i].match(/(\w+)\s+#(.+)__.+/)[2] #意味のみ
       if mode == "J"
         word_show = word_mean
       elsif mode == "E"
