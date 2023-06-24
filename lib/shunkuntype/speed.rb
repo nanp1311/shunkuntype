@@ -61,12 +61,12 @@ EOF
     @number.times do |i|
       print_keyboard()
       puts (i+1).to_s
-#      word = data[i]
+      word_mean = data[i].match(/(\w+)\s+#(.+)/)[1]+" "+data[i].match(/(\w+)\s+#(.+)/)[2]
       word = data[i].match(/(\w+)\s+#(.+)/)[1]
       mean = data[i].match(/(\w+)\s+#(.+)/)[2]
       count+=word.length
       while line!=word do
-        puts mean
+        puts word_mean
         p ''
         line=$stdin.gets.chomp
       end
