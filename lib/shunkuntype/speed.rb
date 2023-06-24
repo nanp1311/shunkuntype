@@ -62,7 +62,7 @@ EOF
       print_keyboard()
       puts (i+1).to_s
 #      word = data[i]
-     p  word = data[i].scan(/(\w+)\s+#(.+)/)[1]
+     p  word = data[i].match(/(\w+)\s+#(.+)/)[1]
 #      mean = data.match(/(\w+)\s+#(.+)/)[2]
       exit()
       count+=word.length
