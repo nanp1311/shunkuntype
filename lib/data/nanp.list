@@ -120,7 +120,7 @@ depend	      #[動]依存する__memo:
 request	      #[名]要求、リクエスト__memo: 
 invalid	      #[形](法的に)受け入れられない__memo: 
 flush	      #[動]バッファないのデータを掃き出す__memo: 
-dispatch      #[動]送る__memo: 
+dispatch      #[動]送る、急いで送り出す__memo: 
 render	      #[動]送り返す__memo: 
 submit	      #[動]提出する、送信する__memo: 
 yield	      #[動]制御を譲る__memo: 
@@ -128,7 +128,7 @@ assign	      #[動]あてがう、代入する__memo:
 alert	      #[名]異常の通知__memo: 
 exception     #[名]例外__memo: 
 assert	      #[動]主張する__memo: 
-send	      #[動]送る__memo: 
+send	      #[動]送る、伝える__memo: 
 path	      #[名]コマンドへ通じる道、ファイルの存在場所__memo: 
 node	      #[名]節点、ネットワーク機器__memo: 
 ignore	      #[動]無視する、除外する__memo: 
