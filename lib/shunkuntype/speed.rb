@@ -34,11 +34,12 @@ EOF
   end
   def mk_random_words
     data=[]
+    example=[]
     data_dir=File.expand_path('../../../lib/data', __FILE__)
     file=open("#{data_dir}/nanp.list",'r')
 #    file=open("#{data_dir}/word.list",'r')
     File.readlines(file).each do |line|
-      data << line #.match(/(\w+)\s+#(.+)/)[1]
+      data << line.match(/(\w+)\s+#(.+)/)[1]
       example << line.match(/(\w+)\s+#(.+)/)[1]
     end
     data.shuffle!
