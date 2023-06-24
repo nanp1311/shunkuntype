@@ -56,7 +56,7 @@ EOF
     print "\nmode[J, E, T]: " # J:単語と意味を両方表示, E:単語の意味のみを表示, T:単語のみを表示
     mode=$stdin.gets.chomp
     p mode
-    while mode!='J' do# || mode!='E' || mode!='T' do
+    while mode!="J" do# || mode!='E' || mode!='T' do
       puts "error"
       print "\nmode[J, E, T]: "
       mode=$stdin.gets.chomp
