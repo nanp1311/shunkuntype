@@ -72,9 +72,19 @@ EOF
       word_mean = data[i].match(/(\w+)\s+#(.+)/)[1]+" "+data[i].match(/(\w+)\s+#(.+)/)[2] #単語+意味
       word = data[i].match(/(\w+)\s+#(.+)/)[1] #単語のみ
       mean = data[i].match(/(\w+)\s+#(.+)/)[2] #意味のみ
+      if mode == 'J' then
+        word_show = word_mean
+      elsif mode == 'E' then
+        word_show = mean
+      elsif mode == 'T' then
+        word_show = word
+      else
+        puts "error"
+        exit()
+      end
       count+=word.length
       while line!=word do
-        puts word_mean
+        puts word_show
         p ''
         line=$stdin.gets.chomp
       end
