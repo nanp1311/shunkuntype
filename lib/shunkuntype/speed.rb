@@ -38,10 +38,8 @@ EOF
     file=open("#{data_dir}/nanp.list",'r')
 #    file=open("#{data_dir}/word.list",'r')
     File.readlines(file).each do |line|
-      p line.match(/(\w+)\s+#(.+)/)
-    #  data << line.match(/(\w+)\s+/)[1]
+      data << line.match(/(\w+)\s+#(.+)/)[1]
     end
-    exit()
     data.shuffle!
     data.each do |word|
       print word+" "
