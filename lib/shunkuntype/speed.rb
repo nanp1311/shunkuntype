@@ -13,7 +13,7 @@ EOF
   end
 
   def initialize
-    @number = 20 #default 20
+    @number = 5 #default 20
     @period = 60
     check_data_files
     data = mk_random_words
