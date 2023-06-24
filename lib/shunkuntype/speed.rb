@@ -53,8 +53,12 @@ EOF
     
 
     print "\n\n"+number.to_s+" words should be cleared."
-    print "\nmode[J or E]: "
+    print "\nmode[J, E, T]: " # J:単語と意味を両方表示, E:単語の意味のみを表示, T:単語のみを表示
     mode=$stdin.gets.chomp
+    while mode!="J" do
+      puts "error"
+      mode=$stdin.gets.chomp
+    end
     print "\nType return-key to start."
     p ''
     line=$stdin.gets
