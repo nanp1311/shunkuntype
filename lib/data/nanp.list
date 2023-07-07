@@ -1,8 +1,8 @@
-create        #[動]無から生成する__memo: IT業界で最も使われる英単語の一つ、なにかを新しく作成するときに使われることが多い
-get           #[動]手に入れる__memo: さまざまな「取得」の場面で使われる、集合そのものを取得する
-find          #[動]見つける、データを取得する__memo: 集合の中から一つの要素を取得する、データの取得に使われる単語
-listen        #[動]イベントを監視する__memo: イベントとは「マウスを右クリックした」、「ポートにデータが到着した」といった出来事、イベントを取得するモノを「リスナー」と呼ぶ
-put           #[動]置く、セットする__memo: 語源は「固定する」という意味、Rubyのputsは「put+string」を表す
+create        #[動]無から生成する__memo: 
+get           #[動]手に入れる__memo: 1
+find          #[動]見つける、データを取得する__memo: 
+listen        #[動]イベントを監視する__memo: 
+put           #[動]置く、セットする__memo: 1
 is            #[動]～である、～を継承している__memo: 
 have          #[動]～を構成要素として持つ、has__memo: 
 add           #[動]付け加える__memo: 
@@ -12,7 +12,7 @@ error	      #[名]致命的な欠陥__memo:
 push	      #[名]最後尾へ追加する__memo: 
 pull	      #[動]引っ張る__memo: 
 return	      #[動]戻る__memo: 
-default	      #[名]初期状態__memo: 初期値
+default	      #[名]初期値、初期状態__memo: 初期値
 interface     #[名]境界面、約束事__memo: 
 commit	      #[動]引っ込みがつかない約束をする、確約する__memo: 
 contain	      #[動]包み込む、包含する、含める__memo: 
@@ -44,7 +44,7 @@ complete      #[動]正常に完了する__memo: ミッションコンプリー�
 launch	      #[動]アプリを起動する、サービスを開始する__memo: 
 implement     #[動]実装する__memo: 
 sanitise      #[動]解毒する、無害化する__memo: 元々はトイレの掃除
-blank	      #[形]文字が書かれていない、空欄の__memo: 空白
+blank	      #[形]空白の、文字が書かれていない、空欄の__memo: 空白
 remove	      #[動]取り除く、削除する__memo: 
 quit	      #[動]やめる、アプリを終了する__memo: 
 exit	      #[動](プログラムから)脱出する__memo: 
@@ -87,12 +87,12 @@ map	      #[動]対応づける__memo:
 function      #[名]関数、func__memo: 
 define	      #[動]定義する、def__memo: 
 strict	      #[形]厳格モード__memo: 
-local	      #[形]地方の、閉じた空間の__memo: 局所的
-global	      #[形]誰からでも見える__memo: 大域的
-scope	      #[名]範囲、スコープ__memo: 見える範囲
+local	      #[形]局所的な、地方の、閉じた空間の__memo: 局所的
+global	      #[形]大域的な、誰からでも見える__memo: 大域的
+scope	      #[名](見える)範囲、スコープ__memo: 見える範囲
 refer	      #[動]参照する__memo: 
 annotate      #[動]注釈を付ける__memo: 
-schema	      #[名]スキーマ、概要__memo: 枠組かな？
+schema	      #[名]枠組、スキーマ、概要__memo: 枠組かな？
 environment   #[名]環境、env__memo: 
 status	      #[名]時間で変化する状況__memo: 
 initialize    #[動]初期化する、init__memo: 
@@ -106,12 +106,12 @@ current	      #[形]いま対象としている、いま乗っている文脈上
 async	      #[形]非同期の、個々が独立している__memo: 
 temporary     #[形]一時的な、tmp__memo: 
 state	      #[名]状態__memo: 
-property      #[名]所有物、プロパティ、prop__memo: 性質
-finally	      #[副]実行を保証する__memo: 最後の
+property      #[名]性質、所有物、プロパティ、prop__memo: 性質
+finally	      #[副]最後の、実行を保証する__memo: 最後の
 entry	      #[名]プログラムの起点、見出し、登録事項__memo: 
 allow	      #[動]入場を許可する__memo: 
 permit	      #[動]実行を許可する__memo: 
-authorization #[名]パワー(権威)の授与、認可、auth__memo: 権限付与
+authorization #[名]パワー(権威、権限)の授与、認可、auth__memo: 権限付与
 private	      #[動]私的な、直接見られない__memo: 
 public	      #[形]公の窓口の__memo: 公的
 meta	      #[形]二次元の、高次元の__memo: ベタの反対
@@ -140,7 +140,7 @@ select	      #[動]選択する__memo:
 limit	      #[名]リミット、限度__memo: 
 match	      #[動]一致する、マッチする__memo: 
 process	      #[名]プロセス、proc__memo: 
-task	      #[名]処理の単位、割り当てられた務め__memo: 仕事
+task	      #[名]仕事、処理の単位、割り当てられた務め__memo: 仕事
 service	      #[名]サービス__memo: 
 execute	      #[動]実行する、exe__memo: 
 kill	      #[動]プロセスを止める__memo: 

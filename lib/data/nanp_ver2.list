@@ -1,0 +1,17 @@
+authorization #[名]パワー(権威、権限)の授与、認可、auth__memo: 権限付与
+ii #bar__区切り
+i #bar__区切り
+get           #[動]手に入れる__memo: 
+put           #[動]置く、セットする__memo: 
+find          #[動]見つける、データを取得する__memo: 
+
+i: create, get, find, put, have, add, delete, success, error, return, default, contain, include, range, union, relation, compose, skip, continue, next, development, complete, blank, remove, quit, exit, stream, result, analyze, string, char, integer, float, array, hash, function, define, local, global, scope, refer, environment, status, initialize, layout, current, temporary, state, finally, allow, private, public, request, submit, assign, assert, send, path, node, ignore, unique, filter, select, limit, match, process, task, service, service, execute, warning, failure, load, exist, 
+
+ii: listen, is, push, pull, length, size, join, evidence, factory, construct, fault, close, format, asset, set, map, feature, entry, permit, require, alert, trim, kill, shell, 
+
+iii: interface, commit, marge, concat, append, association, pending, domein, generate, fetch, progress, launch, implement, sanitise, conflict, import, migrate, binary, octal, decimal, hexadecimal, dump, row, archive, attribute, alter, convert, parse, populate, cascade, plunk, mutation, varchar, strict, annotate, schema, offset, locale, trait, context, async, property, authorization, meta, depend, invalid, fush, dispatch, render, yield, exception, except, abort, variable, invoke, interrupt, compress, identify, deprecated, halt
+
+# memo
+- 適当な単語の難易度分け
+- speed.rbでdataに代入する際に難易度の高い単語を複数回代入すれば出題される確率が上がる？
+- それぞれの単語の正誤率みたいなのを保存したい
