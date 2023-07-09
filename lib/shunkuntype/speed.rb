@@ -49,7 +49,7 @@ EOF
         data.concat(data_tmp)
       end
     end
-    data.shuffle!
+    #data.shuffle!
     data.each do |word|
       print word + " "
     end
