@@ -37,6 +37,7 @@ EOF
 
   def mk_random_words
     data = []
+    data_tmp = []
     example = []
     data_dir = File.expand_path("../../../lib/data", __FILE__)
     file = open("#{data_dir}/nanp_ver2.list", "r")
