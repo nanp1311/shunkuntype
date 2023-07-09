@@ -50,7 +50,7 @@ EOF
         data.flatten!
       end
     end
-    data.shuffle!
+    # data.shuffle!
     data.each do |word|
       print word + " "
     end
