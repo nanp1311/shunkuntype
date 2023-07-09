@@ -53,7 +53,7 @@ EOF
     end
     exit()
     data.shuffle!
-    data.each do |word|
+    example.each do |word|
       print word + " "
     end
     return data
