@@ -1,5 +1,5 @@
 # coding: utf-8
-1 # coding: utf-8
+1# coding: utf-8
 
 class SpeedCheck
   attr_reader :number, :period
@@ -39,12 +39,10 @@ EOF
     data = []
     example = []
     data_dir = File.expand_path("../../../lib/data", __FILE__)
-    file = open("#{data_dir}/nanp_ver2.list", "r")
+    file = open("#{data_dir}/nanp.list", "r")
     File.readlines(file).each do |line|
-      if line.match(/(\w+)\s+#(.+)__.+/)[1] != "i" && line.match(/(\w+)\s+#(.+)__.+/)[1] = "ii"
-        data << line
-        example << line.match(/(\w+)\s+#(.+)__.+/)[1]
-      end
+      data << line
+      example << line.match(/(\w+)\s+#(.+)__.+/)[1]
     end
     data.shuffle!
     example.each do |word|
