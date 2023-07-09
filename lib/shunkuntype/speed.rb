@@ -49,13 +49,12 @@ EOF
         data.push(data_tmp)
         data.flatten!
       end
-      p "#{line}"
     end
-    exit()
     data.shuffle!
-    example.each do |word|
+    data.each do |word|
       print word + " "
     end
+    exit()
     return data
   end
 
