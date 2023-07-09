@@ -58,7 +58,7 @@ compress      #[動]圧縮する__memo:
 identify      #[動]認識する、ファイルが見つかる__memo: 
 deprecated    #[形]非推奨の、廃止予定の__memo: 
 halt	      #[動]コンピュータを停止する__memo: 
-ii 	      #bar__区切り
+hoge 	      #区切り__ii
 listen        #[動]イベントを監視する__memo: 
 is            #[動]～である、～を継承している__memo: 
 push	      #[名]最後尾へ追加する__memo: 
@@ -86,7 +86,7 @@ alert	      #[名]異常の通知__memo: 警告
 trim	      #[動]端の空白を除去する__memo: 
 kill	      #[動]プロセスを止める__memo: 
 shell	      #[名]シェル__memo: 
-i	       #bar__区切り
+hoge 	      #区切り__i
 create        #[動]無から生成する__memo: 
 get           #[動]手に入れる__memo: 
 find          #[動]見つける、データを取得する__memo: 
