@@ -49,8 +49,8 @@ EOF
         data.concat(data_tmp)
       end
     end
-    #data.shuffle!
-    data.each do |word|
+    data.shuffle!
+    example.each do |word|
       print word + " "
     end
     exit()
