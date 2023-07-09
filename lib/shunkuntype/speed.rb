@@ -46,7 +46,6 @@ EOF
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
       end
     end
-    print line
     data.shuffle!
     example.each do |word|
       print word + " "
