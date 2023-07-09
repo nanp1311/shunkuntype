@@ -50,9 +50,10 @@ EOF
       end
     end
     data.shuffle!
-    example.each do |word|
+    data.each do |word|
       print word + " "
     end
+    exit()
     return data
   end
 
