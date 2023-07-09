@@ -46,7 +46,8 @@ EOF
         data_tmp << line
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
       else
-        data << data_tmp
+        data.push(data_tmp)
+        data.flatten!
       end
       p "#{line}"
     end
