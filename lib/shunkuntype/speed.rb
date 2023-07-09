@@ -42,14 +42,15 @@ EOF
     file = open("#{data_dir}/nanp_ver2.list", "r")
     File.readlines(file).each do |line|
       if line.match(/(\w+)\s+#(.+)__.+/)[1] != "hoge"
-        data << line
+        data_tmp << line
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
+      elsif data << data_tmp
       end
       p "#{line}"
     end
     exit()
     data.shuffle!
-    example.each do |word|
+    data.each do |word|
       print word + " "
     end
     return data
