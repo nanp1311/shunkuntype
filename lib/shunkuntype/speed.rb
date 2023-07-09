@@ -53,7 +53,6 @@ EOF
     example.each do |word|
       print word + " "
     end
-    exit()
     return data
   end
 
