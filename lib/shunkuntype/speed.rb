@@ -41,10 +41,10 @@ EOF
     data_dir = File.expand_path("../../../lib/data", __FILE__)
     file = open("#{data_dir}/nanp_ver2.list", "r")
     File.readlines(file).each do |line|
-      #if line.match(/(\w+)\s+#(.+)__.+/)[1] != "i" && line.match(/(\w+)\s+#(.+)__.+/)[1] = "ii"
-      data << line
-      example << line.match(/(\w+)\s+#(.+)__.+/)[1]
-      #end
+      if line.match(/(\w+)\s+#(.+)__.+/)[1] != "i"
+        data << line
+        example << line.match(/(\w+)\s+#(.+)__.+/)[1]
+      end
     end
     print line
     data.shuffle!
