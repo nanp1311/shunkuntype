@@ -45,17 +45,17 @@ EOF
     File.readlines(file).each do |line|
       if line.match(/(\w+)\s+#(.+)__.+/)[1] != "hoge"
         data_tmp << line
+        p "#{line}" + "#{i}"
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
       else
         data.concat(data_tmp)
         i += 1
       end
     end
-    # data.shuffle!
-    data.each do |word|
+    data.shuffle!
+    example.each do |word|
       print word + " "
     end
-    puts "#{i}"
     exit()
     return data
   end
