@@ -45,7 +45,8 @@ EOF
       if line.match(/(\w+)\s+#(.+)__.+/)[1] != "hoge"
         data_tmp << line
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
-      elsif data << data_tmp
+      else
+        data << data_tmp
       end
       p "#{line}"
     end
