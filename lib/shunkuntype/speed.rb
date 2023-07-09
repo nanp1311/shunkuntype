@@ -46,8 +46,7 @@ EOF
         data_tmp << line
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
       else
-        data.push(data_tmp)
-        data.flatten!
+        data.concat(data_tmp)
       end
     end
     # data.shuffle!
