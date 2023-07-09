@@ -45,7 +45,9 @@ EOF
         data << line
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
       end
+      p "#{line}"
     end
+    exit()
     data.shuffle!
     example.each do |word|
       print word + " "
