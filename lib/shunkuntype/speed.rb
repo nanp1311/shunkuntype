@@ -36,6 +36,7 @@ EOF
   end
 
   def mk_random_words
+    i = 0
     data = []
     data_tmp = []
     example = []
@@ -47,12 +48,14 @@ EOF
         example << line.match(/(\w+)\s+#(.+)__.+/)[1]
       else
         data.concat(data_tmp)
+        i += 1
       end
     end
     # data.shuffle!
     data.each do |word|
       print word + " "
     end
+    puts "#{i}"
     exit()
     return data
   end
