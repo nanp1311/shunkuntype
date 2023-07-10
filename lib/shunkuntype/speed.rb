@@ -57,8 +57,8 @@ EOF
       File.open("#{data_dir}/record_miss.list", "a") do |f|
         f.puts(word)
       end
-      exit()
     end
+    exit()
     return data
   end
 
