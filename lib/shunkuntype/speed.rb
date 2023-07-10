@@ -15,7 +15,7 @@ EOF
   end
 
   def initialize
-    @number = 20 #default 20
+    @number = 5 #default 20
     @period = 60
     check_data_files
     data = mk_random_words
@@ -92,12 +92,12 @@ EOF
       end
       count += word.length
       while line != word
+        File.open("#{data_dir}/record_miss.list", "a") { |f|
+          f.write("#{word}\n")
+        }
         puts word_show
         p ""
         line = $stdin.gets.chomp
-        File.open("#{data_dir}/record_miss.list", "a") { |f|
-          f.write("#{line}\n")
-        }
       end
     end
     t1 = Time.now
