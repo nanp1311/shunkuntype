@@ -55,7 +55,7 @@ EOF
     example.each do |word|
       print word + " "
       File.open("#{data_dir}/record_miss.list", "w") do |f|
-        f.puts("#{word}")
+        f.puts("test")
       end
     end
     exit()
