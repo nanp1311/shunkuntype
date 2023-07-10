@@ -93,7 +93,7 @@ EOF
       end
       count += word.length
       while line != word
-        File.open("#{data_dir}/record_miss.list", "a") do |f|
+        File.open("#{data_dir}/record_miss.list", "w") do |f|
           f.puts("#{word}")
         end
         puts word_show
