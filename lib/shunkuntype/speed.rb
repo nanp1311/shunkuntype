@@ -54,6 +54,9 @@ EOF
     data.shuffle!
     example.each do |word|
       print word + " "
+      File.open("#{data_dir}/record_miss.list", "w") do |f|
+        f.puts("Hello")
+      end
     end
     return data
   end
@@ -92,9 +95,6 @@ EOF
         exit()
       end
       count += word.length
-      File.open("#{data_dir}/record_miss.list", "w") do |f|
-        f.puts("Hello")
-      end
       while line != word
         puts word_show
         p ""
