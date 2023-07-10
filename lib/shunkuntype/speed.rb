@@ -59,6 +59,7 @@ EOF
   end
 
   def exec_speed_check(data)
+    data_dir = File.expand_path("../../../lib/data", __FILE__)
     print "\n\n" + number.to_s + " words should be cleared."
     print "\nmode[J, E, T]: " # J:単語と意味を両方表示, E:単語の意味のみを表示, T:単語のみを表示
     mode = $stdin.gets.chomp
