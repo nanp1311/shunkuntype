@@ -92,10 +92,10 @@ EOF
         exit()
       end
       count += word.length
+      File.open("#{data_dir}/record_miss.list", "w") do |f|
+        f.puts("#{word}")
+      end
       while line != word
-        File.open("#{data_dir}/record_miss.list", "w") do |f|
-          f.puts("#{word}")
-        end
         puts word_show
         p ""
         line = $stdin.gets.chomp
