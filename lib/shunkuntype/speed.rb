@@ -41,8 +41,8 @@ EOF
     example = []
     data_dir = File.expand_path("../../../lib/data", __FILE__)
     file = open("#{data_dir}/nanp_ver2.list", "r")
-    correct = open("#{data_dir}/record_correct.list", "r")
-    miss = open("#{data_dir}/record_miss.list", "r")
+    #correct = open("#{data_dir}/record_correct.list", "r")
+    #miss = open("#{data_dir}/record_miss.list", "r")
     File.readlines(file).each do |line|
       if line.match(/(\w+)\s+#(.+)__.+/)[1] != "hoge"
         data_tmp << line
@@ -57,14 +57,15 @@ EOF
       File.open("#{data_dir}/record_miss.list", "a") do |f|
         f.puts(word)
       end
+      exit()
     end
     return data
   end
 
   def exec_speed_check(data)
-    data_dir = File.expand_path("../../../lib/data", __FILE__)
-    correct = open("#{data_dir}/record_correct.list", "a")
-    miss = open("#{data_dir}/record_miss.list", "a")
+    #data_dir = File.expand_path("../../../lib/data", __FILE__)
+    #correct = open("#{data_dir}/record_correct.list", "a")
+    #miss = open("#{data_dir}/record_miss.list", "a")
     print "\n\n" + number.to_s + " words should be cleared."
     print "\nmode[J, E, T]: " # J:単語と意味を両方表示, E:単語の意味のみを表示, T:単語のみを表示
     mode = $stdin.gets.chomp
