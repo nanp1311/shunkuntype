@@ -41,6 +41,8 @@ EOF
     example = []
     data_dir = File.expand_path("../../../lib/data", __FILE__)
     file = open("#{data_dir}/nanp_ver2.list", "r")
+    file_correct = open("#{data_dir}/record_correct.list", "r")
+    file_miss = open("#{data_dir}/record_miss.list", "r")
     File.readlines(file).each do |line|
       if line.match(/(\w+)\s+#(.+)__.+/)[1] != "hoge"
         data_tmp << line
@@ -92,6 +94,9 @@ EOF
         puts word_show
         p ""
         line = $stdin.gets.chomp
+        File.open("#{data_dir}/record_miss.list", "a") { |f|
+          f.write("#{line}\n")
+        }
       end
     end
     t1 = Time.now
