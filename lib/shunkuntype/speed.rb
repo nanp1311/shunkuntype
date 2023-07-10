@@ -61,7 +61,6 @@ EOF
   def exec_speed_check(data)
     data_dir = File.expand_path("../../../lib/data", __FILE__)
     file_correct = open("#{data_dir}/record_correct.list", "a")
-    file_miss = open("#{data_dir}/record_miss.list", "a")
     print "\n\n" + number.to_s + " words should be cleared."
     print "\nmode[J, E, T]: " # J:単語と意味を両方表示, E:単語の意味のみを表示, T:単語のみを表示
     mode = $stdin.gets.chomp
@@ -94,7 +93,9 @@ EOF
       end
       count += word.length
       while line != word
-        file_miss.write("#{word}\n")
+        File.open("#{data_dir}/record_miss.list", "a") do |f|
+          f.puts("#{word}")
+        end
         puts word_show
         p ""
         line = $stdin.gets.chomp
