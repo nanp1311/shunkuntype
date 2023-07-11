@@ -5,7 +5,7 @@ concat	      #[動]文字列を連結する__memo:
 append	      #[動]文章の最後に追加する__memo: 
 association   #[名]つながり、協会__memo: 
 pending	      #[名]保留__memo: 
-domein	      #[名]領域__memo: domain??
+domain	      #[名]領域__memo: domain??
 generate      #[動]時間と労力をかけて生み出す、gen__memo: 
 fetch	      #[動]行って取ってくる__memo: 
 progress      #[動]進行する__memo: 進歩する
