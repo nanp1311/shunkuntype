@@ -54,12 +54,12 @@ EOF
     data.shuffle!
     example.each do |word|
       print word + " "
-      File.open("#{data_dir}/record_miss.list", "a") do |f|
-        f.puts("test")
-        # できない
-      end
+      #File.open("#{data_dir}/record_miss.list", "a") do |f|
+      #  f.puts("test")
+      # できない
+      #end
     end
-    exit()
+    #exit()
     return data
   end
 
